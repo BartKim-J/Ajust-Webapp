@@ -1,3 +1,5 @@
+/* eslint-disable no-class-assign */
+/* eslint-disable no-unused-vars */
 // Standard Import
 import React, { Component } from 'react';
 

@@ -1,3 +1,5 @@
+/* eslint-disable no-class-assign */
+/* eslint-disable no-unused-vars */
 /*
   @file: Group.js
   @auther: ben kim
@@ -258,9 +260,6 @@ let mapDispatchToProps = dispatch => {
     };
 };
 
-ReportGroup = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(ReportGroup);
+ReportGroup = connect(mapStateToProps, mapDispatchToProps,)(ReportGroup);
 
 export default ReportGroup;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Standard Include
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,7 +7,7 @@ import ReactDOM from 'react-dom';
 import Root from './client/Root';
 
 // Style Sheets
-import 'index.scss';
+import './index.scss';
 
 import * as ServiceWorker from './server/ServiceWorker';
 

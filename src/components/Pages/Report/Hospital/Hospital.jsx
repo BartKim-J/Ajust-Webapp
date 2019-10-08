@@ -1,3 +1,5 @@
+/* eslint-disable no-class-assign */
+/* eslint-disable no-unused-vars */
 /*
   @file: Hospital.js
   @auther: ben kim
