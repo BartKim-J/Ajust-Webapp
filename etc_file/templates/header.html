@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AJust</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="https://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="https://handsontable.com/static/css/main.css">
+    <link rel="stylesheet" href={{ url_for('static', filename='css/index.css') }}>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/7.0.3/sanitize.min.css" integrity="sha256-GTI19AFjwR4D3jM433/Lx+tatZyL4N/P2Wqs9TsTeVs=" crossorigin="anonymous" />
+
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.6/socket.io.js"></script>
+
+</head>
+
+<body>
+    <!-- START NAV -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="http://dashboard.ajust.net">
+                <img src="{{url_for('static', filename='img/logo.svg')}}">
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <div id="navbar-timer" class="navbar-item">
+                    2018-05-08 23:20
+                </div>
+                 <div class="navbar-item">
+                    |
+                </div>
+                <div class="navbar-item">
+                    Cancer Center 2F
+                </div>
+                <div class="navbar-item">
+                    |
+                </div>
+                <div class="navbar-item">
+                    Lab2
+                </div>
+                <div class="navbar-item">
+                    |
+                </div>
+                <div class="navbar-item">
+                    Admin
+                </div>
+                <div class="navbar-item">
+                    |
+                </div>
+                <div class="navbar-item">
+                    Dr. Hong gildong
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAV -->

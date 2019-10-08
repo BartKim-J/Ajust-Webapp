@@ -1,0 +1,38 @@
+<div class="column is-2 sidebar ajust-grey-dark">
+    <!-- START Sidebar -->
+
+        <div class="navbar-brand">
+            <div class="navbar-burger burger ajust-grey-dark" data-target="navbarExampleTransparentExample">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="navbar-menu ajust-grey-dark">
+            <aside class="menu">
+            <p class="menu-label white">
+                <img src="{{url_for('static', filename='img/Report.svg')}}" height="10px!important" width="auto"> Report
+            </p>
+            <ul class="menu-list white">
+                <li><a href="/report/hostpital" class="white">Hospital</a></li>
+                <li><a href="/report/department/daily" class="white">Department</a></li>
+                <li><a href="/report/group/lab2" class="white">Group</a></li>
+            </ul>
+            <p class="menu-label white">
+                <img src="{{url_for('static', filename='img/Setting.svg')}}"> Settings
+            </p>
+            <ul class="menu-list white">
+                <li><a href="/setting/group" class="white">Group</a></li>
+                <li><a href="/setting/device" class="white">Device</a></li>
+            </ul>
+            <p class="menu-label white">
+                <img src="{{url_for('static', filename='img/Analysis.svg')}}"> Analysis
+            </p>
+            <ul class="menu-list white">
+                <li><a href="/analysis/data/department" class="white">Data</a></li>
+            </ul>
+                </aside>
+        </div>
+
+    <!-- END Sidebar -->
+</div>

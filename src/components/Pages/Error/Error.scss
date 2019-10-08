@@ -1,0 +1,24 @@
+@import "configure/componentsConfig.scss";
+@import "configure/mediaConfig.scss";
+
+.error-view {
+  min-width: $media-width-desktop;
+
+  width: 100%;
+  height: 100%;
+
+  background: #353b46;
+
+  .error-inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+    font-size: 10vh;
+    line-height: 95vh;
+    color: whitesmoke;
+  }
+}
+

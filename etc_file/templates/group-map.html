@@ -1,0 +1,112 @@
+{% include "header.html" ignore missing %}
+<div class="columns">
+    {% include "sidebar.html" ignore missing %}
+    <div class="column is-10 main no-lr-padding">
+        <!-- head -->
+        <div class="columns">
+            <div class="column is-12 ajust-grey no-lr-padding">
+                <p class="px-24"><b>Report</b> / Department</p>
+            </div>
+        </div>
+        <!-- head fin -->
+
+        <!-- dashboard -->
+        {% include "dashboard.html" ignore missing %}
+        <!-- dashboard -->
+
+        <!-- Tabs start -->
+        <div class="columns ajust-grey-light no-margin-bottom">
+            <div class="tabs is-centered is-boxed is-12">
+                <ul>
+                    <li class="ajust-grey-2 white">
+                        <a href="./lab2">
+                            <span>Daily Result</span>
+                        </a>
+                    </li>
+                    <li class="ajust-grey white">
+                        <a href="./map">
+                            <span>Map</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+        <div class="columns ajust-grey is-gapless">
+            <div class="column is-9 no-lr-padding">
+                <img src="{{url_for('static', filename='img/map_lab2.svg')}}" width="90%" height="auto">
+            </div>
+            <div class="column is-3 no-lr-padding">
+                <div class="columns">
+                    <div class="column no-lr-padding">
+                        <p class="px-10">Device Result</p>
+                        <p class="px-7">2018-10-01 ~ 2018-10-30</p>
+                        <canvas id="canvas-device-pi"></canvas>
+                    </div>
+                </div>
+                <div class="columns">
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+        </div>
+    </div>
+</div>
+<div class="columns">
+</div>
+
+<script>
+    function updateClock() {
+        var now = new Date(), // current date
+            time = now.getHours() + ':' + now.getMinutes(),
+            // a cleaner way than string concatenation
+            date = [now.getFullYear(),
+                now.getMonth()+1,
+                now.getDate()
+            ].join('-');
+
+        document.getElementById('navbar-timer').innerHTML = [date, time].join(' ');
+
+        setTimeout(updateClock, 1000);
+    }
+
+    var all_zero = [0,0,0,0,0,0,9,0,0,0,0];
+    var time = ["07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17"];
+    var optimal_line = [5, 15, 15, 15, 15, 5, 10, 10, 5, 5];
+
+    var handwash_no_require = 40000;
+    var optimal_line = optimal_line.map(x => x / 100 * parseInt(handwash_no_require));
+    var minimal_line = optimal_line.map(x => x / 2);
+    var height = parseInt(Math.max(optimal_line) * 1.25);
+
+    var data2 = { labels: ["Low", "Mid", "High"],
+                datasets: [{
+                    label: "Optimal",
+                    data: [1,1,2],
+                    backgroundColor: ["#ff0000", "#ff8c00", "#7ed321"]
+                }]
+               };
+    var data3 = { labels: ["Low", "Mid", "High"],
+                datasets: [{
+                    data: [0, 44, 44],
+                    backgroundColor: ["#ff0000", "#ff8c00", "#7ed321"]
+
+                }]
+               };
+
+    var options2 = {
+                    legend: {
+                        display: false
+                    }
+                  };
+
+    var ctx1 = document.getElementById("canvas-device-pi").getContext('2d');
+    var myDoughnutChart = new Chart(ctx1, {
+        type: 'doughnut',
+        data: data3,
+        options: options2
+    });
+    updateClock();
+</script>
+{% include "footer.html" ignore missing %}

@@ -1,0 +1,99 @@
+{% include "header.html" ignore missing %}
+<div class="columns">
+{% include "sidebar.html" ignore missing %}
+    <div class="column is-10 no-margin">
+        <!-- head -->
+        <div class="columns">
+            <div class="column is-12 ajust-grey white">
+                <p class="px-24"><b>Setting</b> / Data</p>
+            </div>
+        </div>
+        <!-- head fin -->
+
+        <!-- Tabs start -->
+        <div class="columns ajust-grey-light no-margin-bottom">
+            <div class="tabs is-centered is-boxed is-12">
+                <ul>
+                    <li class="ajust-grey">
+                        <a href="./department" class="white">
+                            <span class="white">Department</span>
+                        </a>
+                    </li>
+                    <li class="ajust-grey-2">
+                        <a href="./office1" class="white">
+                            <span class="white">Office 1</span>
+                        </a>
+                    </li>
+                    <li class="ajust-grey-2">
+                        <a href="./office2" class="white">
+                            <span class="white">Office 2</span>
+                        </a>
+                    </li>
+                    <li class="ajust-grey-2">
+                        <a href="./lab1" class="white">
+                            <span class="white">Lab 1</span>
+                        </a>
+                    </li>
+                    <li class="ajust-grey-2">
+                        <a href="./lab2" class="white">
+                            <span class="white">Lab 2</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Tabs end -->
+
+        <div id="hot" class="ajust-grey no-lr-padding">
+        </div>
+    </div>
+</div>
+
+<script>
+var dataObject = {{ data|safe }};
+var hotElement = document.getElementById('hot');
+var hotElementContainer = hotElement.parentNode;
+var hotSettings = {
+  data: dataObject,
+  columns: [
+    {
+      data: 'id',
+      type: 'text',
+    },
+    {
+      data: 'group',
+      type: 'text'
+    },
+    {
+      data: 'count',
+      type: 'numeric'
+    },
+    {
+      data: 'time',
+      type: 'text',
+    },
+    {
+      data: 'currency',
+      type: 'text'
+    }
+  ],
+  stretchH: 'all',
+  width: 806,
+  autoWrapRow: true,
+  height: 487,
+  maxRows: 22,
+  filters: true,
+  dropdownMenu: true,
+  rowHeaders: true,
+  colHeaders: [
+    'Device ID',
+    'Group',
+    'Count',
+    'Activated At',
+    'Interval'
+  ]
+};
+var hot = new Handsontable(hotElement, hotSettings);
+</script>
+
+{% include "footer.html" ignore missing %}

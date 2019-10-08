@@ -1,0 +1,19 @@
+@import "configure/componentsConfig.scss";
+@import "configure/mediaConfig.scss";
+
+.report-view {
+  min-width: $media-width-desktop;
+
+  width: 100%;
+  height: 100%;
+
+  background: white;
+
+  .report-inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+  }
+}
+

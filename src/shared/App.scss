@@ -1,0 +1,18 @@
+@import "configure/mediaConfig.scss";
+@import "configure/componentsConfig.scss";
+
+.out-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+.inner-container {
+    position: relative;
+}
+
+.contents {
+    padding-right: $sidermenu-width;
+}

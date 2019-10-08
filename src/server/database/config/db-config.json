@@ -1,0 +1,6 @@
+{
+	"host"			: "localhost",
+	"user"			: "ajust",
+	"password"		: "ajust0000",
+	"database"		: "ajust_db"
+}
