@@ -1,26 +1,13 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable no-unused-vars */
-/*
-  @file: DailyResult.js
-  @auther: ben kim
-  @email: jaehwankim07120@gmail.com
-
-  @note
-  @todo
-  @debug
-*/
-// Standard Import
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-// NPM Import
 import { Bar } from 'react-chartjs-2';
-import RangePieChart from '../../Components/RangePieChart';
 
-//Redux
 import { connect } from 'react-redux';
 import { updateWeekRange, updateMonthRange, resetDateRange } from 'actions';
 
-// Style Sheets
+import RangePieChart from 'components/Pages/Report/Components/RangePieChart';
+
 import './DailyResult.scss';
 
 const WeeklyResultData = {
@@ -67,7 +54,7 @@ const BarChartOptions = {
     text: 'Pie Chart Title',
   },
   scales: {
-    //X,Y axis options
+    // X,Y axis options
     xAxes: [
       {
         stacked: true,
@@ -112,41 +99,41 @@ const BarChartOptions = {
 class DailyResult extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      refresh: false,
-    };
+    this.state = {};
 
     this.chartReference = {};
+    console.log(this.props)
+    
+    const { onUpdateWeekRange, onUpdateMonthRange } = this.props;
 
-    this.onWeekRangeChange = this.onWeekRangeChange.bind(this);
-    this.onMonthRangeChange = this.onMonthRangeChange.bind(this);
+    console.log(this.props)
+
+    this.onUpdateWeekRange = onUpdateWeekRange.bind(this);
+    this.onUpdateMonthRange = onUpdateMonthRange.bind(this);
   }
 
   componentDidMount() {
-    this.props._resetAllDate();
+    const { resetAllDate } = this.props;
+    resetAllDate();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps._DailyResultData) {
-      let BarChartInstance = undefined;
+  shouldComponentUpdate(nextProps) {
+    const { DailyResultData } = nextProps;
+
+    if (DailyResultData) {
+      let BarChartInstance;
       if (this.chartReference) {
         BarChartInstance = this.chartReference.chartInstance;
-        BarChartInstance.data = this.props._DailyResultData;
+        BarChartInstance.data = DailyResultData;
         BarChartInstance.update(0);
       }
     }
     return false;
   }
 
-  onWeekRangeChange(dateRange) {
-    this.props._onUpdateWeekRange(dateRange);
-  }
-
-  onMonthRangeChange(dateRange) {
-    this.props._onUpdateMonthRange(dateRange);
-  }
-
   render() {
+    const { DailyResultData, weekRange, monthRange } = this.props;
+
     return (
       <div className="daily-result-container">
         <div className="daily-result-inner">
@@ -154,8 +141,10 @@ class DailyResult extends Component {
           <div className="daily-result-chart-box">
             <div className="daily-result-chart">
               <Bar
-                ref={reference => (this.chartReference = reference)}
-                data={this.props._DailyResultData}
+                ref={reference => {
+                  this.chartReference = reference;
+                }}
+                data={DailyResultData}
                 options={BarChartOptions}
                 redraw
               />
@@ -170,8 +159,8 @@ class DailyResult extends Component {
             <RangePieChart
               title="Weekly Result"
               data={WeeklyResultData}
-              dateRange={this.props.weekRange}
-              dateChange={this.onWeekRangeChange}
+              dateRange={weekRange}
+              dateChange={this.onUpdateWeekRange}
               redraw
             />
 
@@ -179,8 +168,8 @@ class DailyResult extends Component {
             <RangePieChart
               title="Monthly Result"
               data={MonthlyResultData}
-              dateRange={this.props.monthRange}
-              dateChange={this.onMonthRangeChange}
+              dateRange={monthRange}
+              dateChange={this.onUpdateMonthRange}
               redraw
             />
           </div>
@@ -190,23 +179,36 @@ class DailyResult extends Component {
   }
 }
 
-let mapStateToProps = state => {
+const mapStateToProps = state => {
   return {
     weekRange: state.dayRangePicker.weekRange,
     monthRange: state.dayRangePicker.monthRange,
-    _DailyResultData: state.dailyDataUpdater.DailyResultData,
-    _DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
+    DailyResultData: state.dailyDataUpdater.DailyResultData,
   };
 };
 
-let mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
-    _onUpdateWeekRange: dateRange => dispatch(updateWeekRange(dateRange)),
-    _onUpdateMonthRange: dateRange => dispatch(updateMonthRange(dateRange)),
-    _resetAllDate: () => dispatch(resetDateRange()),
+    onUpdateWeekRange: dateRange => dispatch(updateWeekRange(dateRange)),
+    onUpdateMonthRange: dateRange => dispatch(updateMonthRange(dateRange)),
+    resetAllDate: () => dispatch(resetDateRange()),
   };
 };
 
-DailyResult = connect(mapStateToProps, mapDispatchToProps,)(DailyResult);
+DailyResult.propTypes = {
+  resetAllDate: PropTypes.func.isRequired,
+  onUpdateWeekRange: PropTypes.func.isRequired,
+  onUpdateMonthRange: PropTypes.func.isRequired,
+
+  weekRange: PropTypes.object.isRequired,
+  monthRange: PropTypes.object.isRequired,
+  DailyResultData: PropTypes.object.isRequired,
+  // DailyResultStatus: PropTypes.object.isRequired,
+};
+
+DailyResult = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DailyResult);
 
 export default DailyResult;

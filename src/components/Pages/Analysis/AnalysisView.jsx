@@ -1,44 +1,44 @@
-/* eslint-disable no-unused-vars */
-// Standard Import
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 
-// Standard Stylesheet
-import "shards-ui/dist/css/shards.min.css"
+import 'shards-ui/dist/css/shards.min.css';
 
-//Components
+import AnalysisData from './Data/Data';
 
-//Views
-import AnalysisData   from './Data/Data'
-
-//Image
-
-//Style Sheets
 import './AnalysisView.scss';
 
 class ReportView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPath: "/Report",
-    }
+      currentPath: '/Report',
+    };
   }
 
   componentDidMount() {
-    this.props.history.push(`${this.state.currentPath}/Analysis`);
+    const { history } = this.props;
+    const { currentPath } = this.state;
+
+    history.push(`${currentPath}/`);
   }
+
 
   render() {
     return (
       <div className="analysis-view">
         <div className="analysis-inner">
           <Switch>
-            <Route path="/Analysis/Data"    component={AnalysisData} />
+            <Route path="/Analysis/Data" component={AnalysisData} />
           </Switch>
         </div>
       </div>
     );
   }
+}
+
+ReportView.propTypes = {
+  history: PropTypes.object.isRequired,
 }
 
 export default ReportView;

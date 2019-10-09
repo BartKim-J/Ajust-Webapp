@@ -1,42 +1,27 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable no-unused-vars */
-/*
-  @file: Department.js
-  @auther: ben kim
-  @email: jaehwankim07120@gmail.com
-
-  @note
-  @todo
-  @debug
-*/
-// Standard Import
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-// Standard Stylesheet
-import "shards-ui/dist/css/shards.min.css";
+import 'shards-ui/dist/css/shards.min.css';
 
-//Redux
 import { connect } from 'react-redux';
 import { updateDailyResult, updateDailyStatus, resetDailyDatas } from 'actions';
 
-// Components
 import CategoryButtons from 'components/Library/CategoryButtons/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
-import StatusBox from '../Components/StatusBox';
 
-// View
+import StatusBox from 'components/Pages/Report/Components/StatusBox';
+
 import DailyResult from './DailyResult/DailyResult';
 import GroupList from './GroupList/GroupList';
 import Map from './Map/Map';
-
-// Style Sheets
+ 
 import './Department.scss';
 
 const buttonStats = [
-  { label: "Daily Results", link: "DailyResult" },
-  { label: "Group List", link: "GroupList" },
-  { label: "Map", link: "Map" }
+  { label: 'Daily Results', link: 'DailyResult' },
+  { label: 'Group List', link: 'GroupList' },
+  { label: 'Map', link: 'Map' },
 ];
 
 class ReportDepartment extends Component {
@@ -44,124 +29,141 @@ class ReportDepartment extends Component {
     super(props);
     this.state = {
       selected: 0,
-
-      DailyResultData: undefined,
-      DailyResultStatus: undefined,
       UserInfo: undefined,
-
       isLoaded: false,
     };
 
     this.onClickCategoryButtons = this.onClickCategoryButtons.bind(this);
 
-    this.onUpdateDailyResult = this.props._onUpdateDailyResult.bind(this);
-    this.onUpdateDailyStatus = this.props._onUpdateDailyStatus.bind(this);
+    console.log(this.props);
+    
+    const { onUpdateDailyResult, onUpdateDailyStatus } = this.props;
+    
+    this.onUpdateDailyResult = onUpdateDailyResult.bind(this);
+    this.onUpdateDailyStatus = onUpdateDailyStatus.bind(this);
     this.getDailyData = getDailyData.bind(this);
   }
 
   componentDidMount() {
     this.getDailyData();
 
-    setInterval(async () =>{
+    /*
+    setInterval(async () => {
       this.getDailyData();
-    }, 1000); 
-
+    }, 1000);
+    */
   }
+  
 
   shouldComponentUpdate(nextProps, nextState) {
-    if ((this.state.isLoaded === false) && (nextState.isLoaded === true)) {
-      if ((nextProps._DailyResultData !== undefined) && (nextProps._DailyResultStatus !== undefined)) {
+    const { isLoaded, selected } = this.state;
+
+    if (isLoaded === false && nextState.isLoaded === true) {
+      if (nextProps.DailyResultData !== undefined && nextProps.DailyResultStatus !== undefined) {
         return true;
       }
     }
-   
-    if(this.state.selected !== nextState.selected) {
+
+    if (selected !== nextState.selected) {
       return true;
     }
     return false;
   }
 
-  onClickCategoryButtons(value) { this.setState({ selected: value, }); }
+  onClickCategoryButtons = (value) => {
+    this.setState({ selected: value });
+  }
 
   render() {
-    const isLoaded = this.state.isLoaded;
+    const { isLoaded, selected } = this.state;
+    const { DailyResultData, DailyResultStatus } = this.props;
 
+    console.log(this.state);
     if (isLoaded === false) {
-      return null;// note you can also return null here to render nothingNoEventsView />;
+      return null; // note you can also return null here to render nothingNoEventsView />;
     }
-    else {
-      const GroupDatasets = this.props._DailyResultData.datasets;
-      const UserInfo = this.state.UserInfo;
+    const GroupDatasets = DailyResultData.datasets;
+    const { UserInfo } = this.state;
 
-      return (
-        <div className="department-section">
-          <div className="department-inner">
-            {/* Status Boxs */}
-            <div className="department-top-container">
-              <StatusBox
-                DailyResultStatus={this.props._DailyResultStatus}
-                UserInfo={UserInfo}
+    return (
+      <div className="department-section">
+        <div className="department-inner">
+          {/* Status Boxs */}
+          <div className="department-top-container">
+            <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
+          </div>
+
+          <div className="department-bottom-container">
+            {/* Category Buttons */}
+            <div className="button-box">
+              <CategoryButtons
+                buttonStats={buttonStats}
+                currentPath="/Report/Department"
+                selected={selected}
+                clickHandler={this.onClickCategoryButtons}
               />
             </div>
 
-            <div className="department-bottom-container">
-              {/* Category Buttons */}
-              <div className="button-box">
-                <CategoryButtons
-                  buttonStats={buttonStats}
-                  currentPath={`/Report/Department`}
-                  selected={this.state.selected}
-                  clickHandler={this.onClickCategoryButtons}
-                />
-              </div>
+            {/* Router */}
+            <Switch>
+              <Route
+                exact
+                path="/Report/Department"
+                render={() => <Redirect to="/Report/Department/DailyResult" />}
+              />
 
-              {/* Router */}
-              <Switch>
-                <Route exact path={`/Report/Department`} render={() => (
-                  <Redirect to={`/Report/Department/DailyResult`} />
-                )} />
+              <Route
+                exact
+                path="/Report/Department/DailyResult"
+                render={() => <DailyResult />}
+              />
 
-                <Route exact path={`/Report/Department/DailyResult`}
-                  render={props => <DailyResult/>}
-                />
-                <Route path={`/Report/Department/GroupList`}
-                  render={props =>
-                    <GroupList
-                      GroupDatas={GroupDatasets}
-                    />
-                  }
-                />
-                <Route path={`/Report/Department/Map`}
-                  render={props =>
-                    <Map
-                    />
-                  }
-                />
-              </Switch>
+              <Route
+                path="/Report/Department/GroupList"
+                render={() => <GroupList GroupDatas={GroupDatasets} />}
+              />
+              
+              <Route path="/Report/Department/Map" render={() => <Map />} />
 
-            </div>
+            </Switch>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    _DailyResultData: state.dailyDataUpdater.DailyResultData,
-    _DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
-  }
-}
-
-let mapDispatchToProps = (dispatch) =>{
-  return {
-      _onUpdateDailyResult: (dailyResult) => dispatch(updateDailyResult(dailyResult)),
-      _onUpdateDailyStatus: (dailyStatus) => dispatch(updateDailyStatus(dailyStatus)),
-      _resetAllDate: () => dispatch(resetDailyDatas())
+    DailyResultData: state.dailyDataUpdater.DailyResultData,
+    DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
   };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpdateDailyResult: dailyResult => dispatch(updateDailyResult(dailyResult)),
+    onUpdateDailyStatus: dailyStatus => dispatch(updateDailyStatus(dailyStatus)),
+    resetDailyDatas: () => dispatch(resetDailyDatas()),
+  };
+};
+
+ReportDepartment.propTypes = {
+  onUpdateDailyResult: PropTypes.func.isRequired,
+  onUpdateDailyStatus: PropTypes.func.isRequired,
+
+  DailyResultData: PropTypes.object,
+  DailyResultStatus: PropTypes.object,
+};
+
+ReportDepartment.defaultProps = {
+  DailyResultData: undefined,
+  DailyResultStatus: undefined,
 }
 
-ReportDepartment = connect(mapStateToProps, mapDispatchToProps)(ReportDepartment);
+ReportDepartment = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ReportDepartment);
 
 export default ReportDepartment;

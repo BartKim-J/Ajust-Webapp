@@ -1,14 +1,12 @@
-/* eslint-disable no-class-assign */
-// Standard Import
-import {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-// NPM Import
+import { connect } from 'react-redux';
+import { updateWeekRange, updateMonthRange, resetDateRange } from 'actions';
 
-// Redux
-import {connect} from 'react-redux';
-import {updateWeekRange, updateMonthRange, resetDateRange} from 'actions';
+import RangePieChart from 'components/Pages/Report/Components/RangePieChart';
+import { Bar } from 'react-chartjs-2';
 
-// Style Sheets
 import './GroupDailyResult.scss';
 
 const BarChartOptions = {
@@ -73,35 +71,39 @@ class GroupDailyResult extends Component {
     this.state = {};
 
     this.chartReference = {};
-    this.onWeekRangeChange = this.onWeekRangeChange.bind(this);
-    this.onMonthRangeChange = this.onMonthRangeChange.bind(this);
+
+    const { onUpdateWeekRange, onUpdateMonthRange } = this.props;
+
+    console.log(this.props)
+
+    this.onUpdateWeekRange = onUpdateWeekRange.bind(this);
+    this.onUpdateMonthRange = onUpdateMonthRange.bind(this);
   }
 
   componentDidMount() {
-    const { _resetAllDate } = this.props;
-    _resetAllDate();
+    const { resetAllDate } = this.props;
+    resetAllDate();
 
     // console.log(this.chartReference); // returns a Chart.js instance reference
     // const timerId = setInterval(async () => {
     setInterval(async () => {
-      let BarChartInstance = undefined;
       if (this.chartReference) {
-        BarChartInstance = this.chartReference.chartInstance;
+        const BarChartInstance = this.chartReference.chartInstance;
 
         BarChartInstance.update();
       }
     }, 3000);
   }
 
-  onWeekRangeChange(dateRange) {
-    this.props._onUpdateWeekRange(dateRange);
-  }
-
-  onMonthRangeChange(dateRange) {
-    this.props._onUpdateMonthRange(dateRange);
-  }
-
   render() {
+    const {
+      weekRange,
+      monthRange,
+      WeeklyResultData,
+      MonthlyResultData,
+      DailyResultData,
+    } = this.props;
+
     return (
       <div className="group-daily-result-container">
         <div className="group-daily-result-inner">
@@ -109,8 +111,10 @@ class GroupDailyResult extends Component {
           <div className="group-daily-result-chart-box">
             <div className="group-daily-result-chart">
               <Bar
-                ref={reference => (this.chartReference = reference)}
-                data={this.props.DailyResultData}
+                ref={reference => {
+                  this.chartReference = reference;
+                }}
+                data={DailyResultData}
                 options={BarChartOptions}
               />
             </div>
@@ -123,17 +127,17 @@ class GroupDailyResult extends Component {
             {/* Weekly Result Chart */}
             <RangePieChart
               title="Weekly Result"
-              data={this.props.WeeklyResultData}
-              dateRange={this.props.weekRange}
-              dateChange={this.onWeekRangeChange}
+              data={WeeklyResultData}
+              dateRange={weekRange}
+              dateChange={this.onUpdateWeekRange}
             />
 
             {/* Monthly Result Chart */}
             <RangePieChart
               title="Monthly Result"
-              data={this.props.MonthlyResultData}
-              dateRange={this.props.monthRange}
-              dateChange={this.onMonthRangeChange}
+              data={MonthlyResultData}
+              dateRange={monthRange}
+              dateChange={this.onUpdateMonthRange}
             />
           </div>
         </div>
@@ -142,21 +146,37 @@ class GroupDailyResult extends Component {
   }
 }
 
-let mapStateToProps = state => {
+const mapStateToProps = state => {
   return {
     weekRange: state.dayRangePicker.weekRange,
     monthRange: state.dayRangePicker.monthRange,
   };
 };
 
-let mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
-    _onUpdateWeekRange: dateRange => dispatch(updateWeekRange(dateRange)),
-    _onUpdateMonthRange: dateRange => dispatch(updateMonthRange(dateRange)),
-    _resetAllDate: () => dispatch(resetDateRange()),
+    onUpdateWeekRange: dateRange => dispatch(updateWeekRange(dateRange)),
+    onUpdateMonthRange: dateRange => dispatch(updateMonthRange(dateRange)),
+    resetAllDate: () => dispatch(resetDateRange()),
   };
 };
 
-GroupDailyResult = connect(mapStateToProps, mapDispatchToProps,)(GroupDailyResult);
+GroupDailyResult.propTypes = {
+  onUpdateWeekRange: PropTypes.func.isRequired,
+  onUpdateMonthRange: PropTypes.func.isRequired,
+  resetAllDate: PropTypes.func.isRequired,
+
+  weekRange: PropTypes.object.isRequired,
+  monthRange: PropTypes.object.isRequired,
+
+  DailyResultData: PropTypes.object.isRequired,
+  WeeklyResultData: PropTypes.object.isRequired,
+  MonthlyResultData: PropTypes.object.isRequired,
+};
+
+GroupDailyResult = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GroupDailyResult);
 
 export default GroupDailyResult;

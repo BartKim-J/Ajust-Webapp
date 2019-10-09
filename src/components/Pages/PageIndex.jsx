@@ -1,4 +1,4 @@
-//Report
+// Report
 
 export { default as ReportView } from 'components/Pages/Report/ReportView';
 export {
@@ -9,15 +9,15 @@ export {
 } from 'components/Pages/Report/Department/Department';
 export { default as ReportGroup } from 'components/Pages/Report/Group/Group';
 
-//Setting
-//export { default as SettingDevice }        from 'components/Pages/Setting/Device/Device';
-//export { default as SettingGroup }         from 'components/Pages/Setting/Group/Group';
+// Setting
+// export { default as SettingDevice }        from 'components/Pages/Setting/Device/Device';
+// export { default as SettingGroup }         from 'components/Pages/Setting/Group/Group';
 
-//Analysis
+// Analysis
 export {
     default as AnalysisView,
 } from 'components/Pages/Analysis/AnalysisView';
 export { default as AnalysisData } from 'components/Pages/Analysis/Data/Data';
 
-//Error
+// Error
 export { default as ErrorView } from 'components/Pages/Error/Error';

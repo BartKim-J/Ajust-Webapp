@@ -1,8 +1,12 @@
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/require-default-props */
+/* eslint-disable no-new */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import classNames from 'classnames'
+  ;
 import shortid from 'shortid';
 
 import { Card, CardBody } from "shards-react";

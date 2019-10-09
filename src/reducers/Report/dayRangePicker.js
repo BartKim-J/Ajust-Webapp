@@ -1,39 +1,38 @@
-import { 
-  WEEK_UPDATE_DATE, 
-  MONTH_UPDATE_DATE, 
-  RESET_DATE 
-} from 'actions';
+import { WEEK_UPDATE_DATE, MONTH_UPDATE_DATE, RESET_DATE } from 'actions';
 
-const _dayRange = {
+const dayRange = {
   startDate: new Date(),
-  endDate: new Date()
+  endDate: new Date(),
 };
 
-const _dayRangePickerInitialState = {
-  weekRange: _dayRange,
-  monthRange: _dayRange
+const dayRangePickerInitialState = {
+  weekRange: dayRange,
+  monthRange: dayRange,
 };
 
-
-export const dayRangePicker = (state = _dayRangePickerInitialState, action) => {
-  switch(action.type) {
+export const dayRangePicker = (state = dayRangePickerInitialState, action) => {
+  switch (action.type) {
     case WEEK_UPDATE_DATE:
-      return Object.assign({}, state, {
-        weekRange: action.dateRange
-      });
+      return {
+        ...state,
+        weekRange: action.dateRange,
+      };
 
     case MONTH_UPDATE_DATE:
-      return Object.assign({}, state, {
-        monthRange: action.dateRange
-      });
+      return {
+        ...state,
+        monthRange: action.dateRange,
+      };
 
     case RESET_DATE:
-      return Object.assign({}, state, {
-        weekRange: _dayRange,
-        monthRange: _dayRange
-      });
+      return {
+        ...state,
+        weekRange: dayRange,
+        monthRange: dayRange,
+      };
     default:
       return state;
   }
 };
 
+export default dayRangePicker;

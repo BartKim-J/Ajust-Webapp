@@ -1,72 +1,59 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable no-unused-vars */
-// Standard Import
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-// NPM Import
-import RangePieChart from '../../Components/RangePieChart'
+import RangePieChart from 'components/Pages/Report/Components/RangePieChart';
 
-//Redux
 import { connect } from 'react-redux';
-import { updateWeekRange, updateMonthRange, resetDateRange } from 'actions'
+import { updateWeekRange, updateMonthRange, resetDateRange } from 'actions';
 
-// Style Sheets
 import './GroupMap.scss';
 
-//Images
+import imgDummyMap from './Images/DummyMap@3x.png';
 
-import imgDummyMap from './Images/DummyMap@3x.png'
-
-class GroupMap extends Component {
+export class GroupMap extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = {};
 
-    };
+    const { onUpdateWeekRange, onUpdateMonthRange } = this.props;
 
-    this.onWeekRangeChange = this.onWeekRangeChange.bind(this);
-    this.onMonthRangeChange = this.onMonthRangeChange.bind(this);
+    console.log(this.props)
+
+    this.onUpdateWeekRange = onUpdateWeekRange.bind(this);
+    this.onUpdateMonthRange = onUpdateMonthRange.bind(this);
   }
 
   componentDidMount() {
-    this.props._resetAllDate();
-  }
-
-  onWeekRangeChange(dateRange) {
-    this.props._onUpdateWeekRange(dateRange);
-  }
-
-  onMonthRangeChange(dateRange) {
-    this.props._onUpdateMonthRange(dateRange);
+    const { resetAllDate } = this.props;
+    resetAllDate();
   }
 
   render() {
+    const { DeviceResultData, monthRange } = this.props;
+
     return (
       <div className="group-map-container">
         <div className="group-map-inner">
-
           {/* Daily Chart Box */}
           <div className="group-map-box">
             <div className="group-map-chart">
               <div className="group-dummy-map-wrap">
-                <img className="group-dummy-map" src={imgDummyMap} alt="dummy map"/>
+                <img className="group-dummy-map" src={imgDummyMap} alt="dummy map" />
               </div>
             </div>
           </div>
 
           {/* Device Result Chart Box */}
           <div className="group-other-result-chart-box">
-
             <div className="group-vertical-line" />
 
             {/* Device Result Chart */}
             <div className="group-chart-wrap">
               <RangePieChart
                 title="Device Result"
-                data={this.props.DeviceResultData}
-
-                dateRange={this.props.monthRange}
-                dateChange={this.onMonthRangeChange}
+                data={DeviceResultData}
+                dateRange={monthRange}
+                dateChange={this.onUpdateMonthRange}
               />
             </div>
           </div>
@@ -76,21 +63,40 @@ class GroupMap extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
+
+const mapStateToProps = state => {
   return {
     weekRange: state.dayRangePicker.weekRange,
     monthRange: state.dayRangePicker.monthRange,
-  }
-}
-
-let mapDispatchToProps = (dispatch) => {
-  return {
-    _onUpdateWeekRange: (dateRange) => dispatch(updateWeekRange(dateRange)),
-    _onUpdateMonthRange: (dateRange) => dispatch(updateMonthRange(dateRange)),
-    _resetAllDate: () => dispatch(resetDateRange())
+    DailyResultData: state.dailyDataUpdater.DailyResultData,
+    // DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
   };
-}
+};
 
-GroupMap = connect(mapStateToProps, mapDispatchToProps)(GroupMap);
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpdateWeekRange: dateRange => dispatch(updateWeekRange(dateRange)),
+    onUpdateMonthRange: dateRange => dispatch(updateMonthRange(dateRange)),
+    resetAllDate: () => dispatch(resetDateRange()),
+  };
+};
+
+GroupMap.propTypes = {
+  resetAllDate: PropTypes.func.isRequired,
+  onUpdateWeekRange: PropTypes.func.isRequired,
+  onUpdateMonthRange: PropTypes.func.isRequired,
+
+  // weekRange: PropTypes.object.isRequired,
+  monthRange: PropTypes.object.isRequired,
+  DeviceResultData: PropTypes.object.isRequired,
+
+  // DailyResultData: PropTypes.object.isRequired,  
+  // DailyResultStatus: PropTypes.object.isRequired,
+};
+
+GroupMap = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GroupMap);
 
 export default GroupMap;

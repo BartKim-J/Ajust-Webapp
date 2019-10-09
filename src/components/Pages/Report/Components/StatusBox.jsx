@@ -1,164 +1,149 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable no-unused-vars */
-// Standard Import
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'shards-react';
 
-//Redux
 import { connect } from 'react-redux';
 
-// Style Sheets
 import './Stylesheet/StatusBox.scss';
-import SmallStats from './SmallStats'
-
+import SmallStats from './SmallStats';
 
 const SmallStateAttrs = {
-  md: "4", sm: "6", lg: "0",
-}
-
-
+  md: '4',
+  sm: '6',
+  lg: '0',
+};
 
 class StatusBox extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
-      smallStats: undefined,
     };
 
     this.smallStatsForm = this.smallStatsForm.bind(this);
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   smallStatsForm() {
-    let StatusByProps   = this.props._DailyResultStatus;
-    let UserInfoByProps = this.props.UserInfo; 
+    const { DailyResultStatus, UserInfo } = this.props;
 
     return [
       {
-        label: "Realtime Count",
-        value: StatusByProps.dataByRealTime,
-        percentage: StatusByProps.dataByRealTime,
+        label: 'Realtime Count',
+        value: DailyResultStatus.dataByRealTime,
+        percentage: DailyResultStatus.dataByRealTime,
         increase: true,
         decrease: !this.increase,
-        chartLabels: Array(StatusByProps.dataByRealTimeData.length),
+        chartLabels: Array(DailyResultStatus.dataByRealTimeData.length),
         attrs: SmallStateAttrs,
         datasets: [
           {
-            label: "Today",
-            fill: "start",
+            label: 'Today',
+            fill: 'start',
             borderWidth: 1.5,
-            backgroundColor: "rgba(0, 184, 216, 0.5)",
-            borderColor: "rgb(0, 184, 216)",
-            data: StatusByProps.dataByRealTimeData,
-          }
-        ]
+            backgroundColor: 'rgba(0, 184, 216, 0.5)',
+            borderColor: 'rgb(0, 184, 216)',
+            data: DailyResultStatus.dataByRealTimeData,
+          },
+        ],
       },
       {
-        label: "Daily Count",
-        value: StatusByProps.dataByTotal,
-        percentage: StatusByProps.dataByTotal,
+        label: 'Daily Count',
+        value: DailyResultStatus.dataByTotal,
+        percentage: DailyResultStatus.dataByTotal,
         increase: true,
         decrease: !this.increase,
-        chartLabels: Array(StatusByProps.dataByTime.length),
+        chartLabels: Array(DailyResultStatus.dataByTime.length),
         attrs: SmallStateAttrs,
         datasets: [
           {
-            label: "Today",
-            fill: "start",
+            label: 'Today',
+            fill: 'start',
             borderWidth: 1.5,
-            backgroundColor: "rgba(23,198,113,0.5)",
-            borderColor: "rgb(23,198,113)",
-            data: StatusByProps.dataByTime,
-          }
-        ]
+            backgroundColor: 'rgba(23,198,113,0.5)',
+            borderColor: 'rgb(23,198,113)',
+            data: DailyResultStatus.dataByTime,
+          },
+        ],
       },
       {
-        label: "Daily Hygiene",
-        value: UserInfoByProps.hygieneLevel,
-        percentage: UserInfoByProps.hygieneLevel,
+        label: 'Daily Hygiene',
+        value: UserInfo.hygieneLevel,
+        percentage: UserInfo.hygieneLevel,
         increase: false,
         decrease: !this.increase,
-        chartLabels: [null, ],
+        chartLabels: [null],
         attrs: SmallStateAttrs,
         datasets: [
           {
-            label: "Today",
-            fill: "start",
+            label: 'Today',
+            fill: 'start',
             borderWidth: 1.5,
-            backgroundColor: "rgba(255,180,0,0.5)",
-            borderColor: "rgb(255,180,0)",
-            data: [0]
-          }
-        ]
+            backgroundColor: 'rgba(255,180,0,0.5)',
+            borderColor: 'rgb(255,180,0)',
+            data: [0],
+          },
+        ],
       },
       {
-        label: "Hygiene Level",
-        value: UserInfoByProps.hygieneLevel,
-        percentage: UserInfoByProps.hygieneLevel,
+        label: 'Hygiene Level',
+        value: UserInfo.hygieneLevel,
+        percentage: UserInfo.hygieneLevel,
         increase: false,
         decrease: !this.increase,
-        chartLabels: [null, ],
+        chartLabels: [null],
         attrs: SmallStateAttrs,
         datasets: [
           {
-            label: "Today",
-            fill: "start",
+            label: 'Today',
+            fill: 'start',
             borderWidth: 1.5,
-            backgroundColor: "rgb(0,123,255,0.5)",
-            borderColor: "rgb(0,123,255)",
-            data: [0]
-          }
-        ]
+            backgroundColor: 'rgb(0,123,255,0.5)',
+            borderColor: 'rgb(0,123,255)',
+            data: [0],
+          },
+        ],
       },
       {
-        label: "Staff",
-        value: UserInfoByProps.staff,
-        percentage: UserInfoByProps.staff,
+        label: 'Staff',
+        value: UserInfo.staff,
+        percentage: UserInfo.staff,
         increase: true,
         decrease: !this.increase,
-        chartLabels: [null, ],
+        chartLabels: [null],
         attrs: SmallStateAttrs,
         datasets: [
           {
-            label: "Today",
-            fill: "start",
+            label: 'Today',
+            fill: 'start',
             borderWidth: 1.5,
-            backgroundColor: "rgba(255,65,105,0.5)",
-            borderColor: "rgb(255,65,105)",
-            data: [0]
-          }
-        ]
+            backgroundColor: 'rgba(255,65,105,0.5)',
+            borderColor: 'rgb(255,65,105)',
+            data: [0],
+          },
+        ],
       },
       {
-        label: "Device",
-        value: UserInfoByProps.device,
-        percentage: UserInfoByProps.device,
+        label: 'Device',
+        value: UserInfo.device,
+        percentage: UserInfo.device,
         increase: true,
         decrease: !this.increase,
         chartLabels: [null, null, null],
         attrs: SmallStateAttrs,
         datasets: [
           {
-            label: "Today",
-            fill: "start",
+            label: 'Today',
+            fill: 'start',
             borderWidth: 1.5,
-            backgroundColor: "rgb(0,123,255,0.5)",
-            borderColor: "rgb(0,123,255)",
-            data: [0, 1, 1,]
-          }
-        ]
+            backgroundColor: 'rgb(0,123,255,0.5)',
+            borderColor: 'rgb(0,123,255)',
+            data: [0, 1, 1],
+          },
+        ],
       },
     ];
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-
-    return true;
   }
 
   render() {
@@ -168,7 +153,7 @@ class StatusBox extends Component {
           <Container fluid className="status-boxs px-4">
             <Row>
               {this.smallStatsForm().map((stats, idx) => (
-                <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
+                <Col className="col-lg mb-4" key={stats.label} {...stats.attrs}>
                   <SmallStats
                     id={`small-stats-${idx}`}
                     variation="1"
@@ -190,20 +175,20 @@ class StatusBox extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    _DailyResultData: state.dailyDataUpdater.DailyResultData,
-    _DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
-  }
-}
-
-let mapDispatchToProps = (dispatch) =>{
-  return {
+    DailyResultData: state.dailyDataUpdater.DailyResultData,
+    DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
   };
+};
+
+StatusBox.propTypes = {
+  UserInfo: PropTypes.object.isRequired,
+  DailyResultStatus: PropTypes.object.isRequired,
 }
 
-StatusBox = connect(mapStateToProps, mapDispatchToProps)(StatusBox);
+StatusBox = connect(
+  mapStateToProps,
+)(StatusBox);
 
-
-export default StatusBox;
-
+export default StatusBox

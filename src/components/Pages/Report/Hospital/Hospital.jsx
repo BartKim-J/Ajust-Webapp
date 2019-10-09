@@ -1,42 +1,27 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable no-unused-vars */
-/*
-  @file: Hospital.js
-  @auther: ben kim
-  @email: jaehwankim07120@gmail.com
-
-  @note
-  @todo
-  @debugreact
-*/
-// Standard Import
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-// Standard Stylesheet
-import "shards-ui/dist/css/shards.min.css";
+import 'shards-ui/dist/css/shards.min.css';
 
-//Redux
 import { connect } from 'react-redux';
 import { updateDailyResult, updateDailyStatus, resetDailyDatas } from 'actions';
 
-// Components
 import CategoryButtons from 'components/Library/CategoryButtons/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 import StatusBox from '../Components/StatusBox';
 
-// Style Sheets
 import './Hospital.scss';
 
 const buttonStats = [
   {
-    label: "CATEGORY 1",
-    link: "CATEGORY 1"
+    label: 'CATEGORY 1',
+    link: 'CATEGORY 1',
   },
   {
-    label: "CATEGORY 2",
-    link: "CATEGORY 2"
-  }
+    label: 'CATEGORY 2',
+    link: 'CATEGORY 2',
+  },
 ];
 
 class ReportHospital extends Component {
@@ -45,99 +30,96 @@ class ReportHospital extends Component {
     this.state = {
       selected: 0,
 
-      DailyResultData: undefined,
-      DailyResultStatus: undefined,
       UserInfo: undefined,
 
       isLoaded: false,
     };
 
-
     this.onClickCategoryButtons = this.onClickCategoryButtons.bind(this);
 
-    this.onUpdateDailyResult = this.props._onUpdateDailyResult.bind(this);
-    this.onUpdateDailyStatus = this.props._onUpdateDailyStatus.bind(this);
+    const { onUpdateDailyResult, onUpdateDailyStatus } = this.props;
+
+    this.onUpdateDailyResult = onUpdateDailyResult.bind(this);
+    this.onUpdateDailyStatus = onUpdateDailyStatus.bind(this);
     this.getDailyData = getDailyData.bind(this);
   }
 
   componentDidMount() {
     this.getDailyData();
-
-    /*
-    setInterval(async () =>{
-      this.getDailyData();
-    }, 3000);
-    */
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
+  onClickCategoryButtons(value) {
+    this.setState({ selected: value });
   }
-
-
-  onClickCategoryButtons(value) { this.setState({ selected: value, }); }
 
   render() {
-    const isLoaded = this.state.isLoaded;
-
+    const { isLoaded, selected } = this.state;
+    const { DailyResultStatus } = this.props;
+    
     if (isLoaded === false) {
-      return null;// note you can also return null here to render nothingNoEventsView />;
-    }
-    else {
-      //const GroupDatasets = this.props._DailyResultData.datasets;
-      const UserInfo = this.state.UserInfo;
+      return null; // note you can also return null here to render nothingNoEventsView />;
+    } 
+      // const GroupDatasets = this.props._DailyResultData.datasets;
+      const {UserInfo} = this.state;
 
       return (
         <div className="hospital-section">
           <div className="hospital-inner">
-
             {/* Status Boxs */}
             <div className="hospital-top-container">
-              <StatusBox
-                DailyResultStatus={this.props._DailyResultStatus}
-                UserInfo={UserInfo}
-              />
+              <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
             </div>
 
             <div className="hospital-bottom-container">
               <div className="button-box">
                 <CategoryButtons
                   buttonStats={buttonStats}
-                  currentPath={`/Report/Hospital`}
-                  selected={this.state.selected}
+                  currentPath="/Report/Hospital"
+                  selected={selected}
                   clickHandler={this.onClickCategoryButtons}
                 />
               </div>
 
               <Switch>
-                <Route exact path="/Report/Hospital" render={() => (
-                  <Redirect to="/Report/Hospital/?" />
-                )} />
+                <Route
+                  exact
+                  path="/Report/Hospital"
+                  render={() => <Redirect to="/Report/Hospital/?" />}
+                />
               </Switch>
-
             </div>
           </div>
         </div>
       );
-    }
+    
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    _DailyResultData: state.dailyDataUpdater.DailyResultData,
-    _DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
-  }
-}
-
-let mapDispatchToProps = (dispatch) => {
-  return {
-    _onUpdateDailyResult: (dailyResult) => dispatch(updateDailyResult(dailyResult)),
-    _onUpdateDailyStatus: (dailyStatus) => dispatch(updateDailyStatus(dailyStatus)),
-    _resetAllDate: () => dispatch(resetDailyDatas())
+    DailyResultData: state.dailyDataUpdater.DailyResultData,
+    DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
   };
-}
+};
 
-ReportHospital = connect(mapStateToProps, mapDispatchToProps)(ReportHospital);
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpdateDailyResult: dailyResult => dispatch(updateDailyResult(dailyResult)),
+    onUpdateDailyStatus: dailyStatus => dispatch(updateDailyStatus(dailyStatus)),
+    resetAllDate: () => dispatch(resetDailyDatas()),
+  };
+};
+
+ReportHospital.propTypes = {
+  onUpdateDailyResult: PropTypes.func.isRequired,
+  onUpdateDailyStatus: PropTypes.func.isRequired,
+
+  DailyResultStatus: PropTypes.object.isRequired,
+};
+
+ReportHospital = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ReportHospital);
 
 export default ReportHospital;

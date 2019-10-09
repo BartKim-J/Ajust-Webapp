@@ -1,28 +1,28 @@
-//Reducer :: Report/dayRangePicker
+// Reducer :: Report/dayRangePicker
 export { 
-    //Command
+    // Command
     WEEK_UPDATE_DATE,
     MONTH_UPDATE_DATE,
     RESET_DATE,
 
-    //Dispatcher
-    updateWeekRange,       //(dateRange)
-    updateMonthRange,      //(dateRange)
-    resetDateRange         //()
+    // Dispatcher
+    updateWeekRange,       // (dateRange)
+    updateMonthRange,      // (dateRange)
+    resetDateRange         // ()
 } from './Report/dayRangePicker'
 
-//Reducer :: Report/dayRangePicker
+// Reducer :: Report/dayRangePicker
 export { 
-    //Command
+    // Command
     DAILY_RESULT_UPDATE,
     DAILY_STATUS_UPDATE,
     RESET_DAILY_DATAS,
 
-    //Dispatcher
-    updateDailyResult,      //(dailyResult)
-    updateDailyStatus,      //(dailyStatus)
-    resetDailyDatas         //()
+    // Dispatcher
+    updateDailyResult,      // (dailyResult)
+    updateDailyStatus,      // (dailyStatus)
+    resetDailyDatas         // ()
 } from './Report/dailyDataUpdater'
 
 
-//Reducer :: extends
+// Reducer :: extends

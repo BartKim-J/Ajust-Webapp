@@ -1,265 +1,239 @@
-/* eslint-disable no-class-assign */
-/* eslint-disable no-unused-vars */
-/*
-  @file: Group.js
-  @auther: ben kim
-  @email: jaehwankim07120@gmail.com
-
-  @note
-  @todo
-  @debug
-*/
-// Standard Import
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { FormSelect } from 'shards-react';
 
-// Standard Stylesheet
 import 'shards-ui/dist/css/shards.min.css';
 
-//Redux
 import { connect } from 'react-redux';
 import { updateDailyResult, updateDailyStatus, resetDailyDatas } from 'actions';
 
-// Components
 import CategoryButtons from 'components/Library/CategoryButtons/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 import StatusBox from '../Components/StatusBox';
 
-// View
 import GroupDailyResult from './GroupDailyResult/GroupDailyResult';
-import GroupMap from './GroupMap/GroupMap';
+import { GroupMap } from './GroupMap/GroupMap';
 
 // Style Sheets
 import './Group.scss';
 
 const WeeklyResultData = {
-    type: 'doughnut',
-    datasets: [
-        {
-            borderWidth: 0,
-            data: [1, 1, 1],
-            backgroundColor: ['#7ed321', '#ff7700', '#ff0000'],
-        },
-    ],
+  type: 'doughnut',
+  datasets: [
+    {
+      borderWidth: 0,
+      data: [1, 1, 1],
+      backgroundColor: ['#7ed321', '#ff7700', '#ff0000'],
+    },
+  ],
 
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: ['Optmal', 'Safie', 'Warning'],
+  // These labels appear in the legend and in the tooltips when hovering different arcs
+  labels: ['Optmal', 'Safie', 'Warning'],
 };
 
 const MonthlyResultData = {
-    type: 'doughnut',
-    datasets: [
-        {
-            borderWidth: 0,
-            data: [1, 1, 1],
-            backgroundColor: ['#7ed321', '#ff7700', '#ff0000'],
-        },
-    ],
+  type: 'doughnut',
+  datasets: [
+    {
+      borderWidth: 0,
+      data: [1, 1, 1],
+      backgroundColor: ['#7ed321', '#ff7700', '#ff0000'],
+    },
+  ],
 
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: ['Optmal', 'Safie', 'Warning'],
+  // These labels appear in the legend and in the tooltips when hovering different arcs
+  labels: ['Optmal', 'Safie', 'Warning'],
 };
 
 const buttonStats = [
-    {
-        label: 'Daily Results',
-        link: 'DailyResult',
-    },
-    {
-        label: 'Map',
-        link: 'Map',
-    },
+  {
+    label: 'Daily Results',
+    link: 'DailyResult',
+  },
+  {
+    label: 'Map',
+    link: 'Map',
+  },
 ];
 
 class ReportGroup extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selected: 0,
-            selectedGroup: 0,
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: 0,
+      selectedGroup: 0,
 
-            DailyResultData: undefined,
-            DailyResultStatus: undefined,
-            UserInfo: undefined,
+      UserInfo: undefined,
 
-            isLoaded: false,
-        };
+      isLoaded: false,
+    };
 
-        this.onUpdateDailyResult = this.props._onUpdateDailyResult.bind(this);
-        this.onUpdateDailyStatus = this.props._onUpdateDailyStatus.bind(this);
-        this.getDailyData = getDailyData.bind(this);
+    const { onUpdateDailyResult, onUpdateDailyStatus } = this.props;
 
-        this.onClickCategoryButtons = this.onClickCategoryButtons.bind(this);
-        this.onChangeGroupForm = this.onChangeGroupForm.bind(this);
+    this.onUpdateDailyResult = onUpdateDailyResult.bind(this);
+    this.onUpdateDailyStatus = onUpdateDailyStatus.bind(this);
+    this.getDailyData = getDailyData.bind(this);
 
-        this.selectGroupForm = this.selectGroupForm.bind(this);
-        this.getGroupData = this.getGroupData.bind(this);
-    }
+    this.onClickCategoryButtons = this.onClickCategoryButtons.bind(this);
+    this.onChangeGroupForm = this.onChangeGroupForm.bind(this);
 
-    componentDidMount() {
-        this.getDailyData();
+    this.selectGroupForm = this.selectGroupForm.bind(this);
+    this.getGroupData = this.getGroupData.bind(this);
+  }
 
-        /*
-    setInterval(async () =>{
-      this.getDailyData();
-    }, 3000);
-    */
-    }
+  componentDidMount() {
+    this.getDailyData();
+  }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
-    }
+  onClickCategoryButtons(value) {
+    this.setState({
+      selected: value,
+    });
 
-    onClickCategoryButtons(value) {
-        this.setState({
-            selected: value,
-        });
+    this.getGroupData = this.getGroupData.bind(this);
+  }
 
-        this.getGroupData = this.getGroupData.bind(this);
-    }
+  onChangeGroupForm(event) {
+    const { history } = this.props;
 
-    onChangeGroupForm(event) {
-        this.setState({ selectedGroup: event.target.value });
-        this.props.history.push(
-            `${this.props.history.location.pathname}?${event.target.value}`,
-        );
+    this.setState({ selectedGroup: event.target.value });
+    history.push(`${history.location.pathname}?${event.target.value}`);
 
-        console.log(this.props.history);
-    }
+    console.log(history);
+  }
 
-    selectGroupForm() {
-        const GroupDatas = this.props._DailyResultData.datasets;
+  getGroupData(index) {
+    const { DailyResultData } = this.props;
 
-        return (
-            <FormSelect
-                onChange={this.onChangeGroupForm}
-                className="group-select-form"
-            >
-                {GroupDatas.map((data, index) => (
-                    <option key={index} value={index}>
-                        {data.label}
-                    </option>
-                ))}
-            </FormSelect>
-        );
-    }
+    const retDailyResultData = {
+      type: 'bar',
+      labels:  DailyResultData.labels,
+      datasets: [DailyResultData.datasets[index]],
+    };
 
-    getGroupData(index) {
-        const selectedGroupDatasets = [
-            this.props._DailyResultData.datasets[index],
-        ];
+    return retDailyResultData;
+  }
 
-        const selectedGroupLabels = this.props._DailyResultData.labels;
+  selectGroupForm() {
+    const { DailyResultData } = this.props;
+    const GroupDatas = DailyResultData.datasets;
 
-        const DailyResultData = {
-            type: 'bar',
-            labels: selectedGroupLabels,
-            datasets: selectedGroupDatasets,
-        };
+    return (
+      <FormSelect onChange={this.onChangeGroupForm} className="group-select-form">
+        {GroupDatas.map((data, index) => (
+          <option key={data.label} value={index}>
+            {data.label}
+          </option>
+        ))}
+      </FormSelect>
+    );
+  }
 
-        return DailyResultData;
-    }
+  render() {
+    const { isLoaded, selected } = this.state;
+    const { DailyResultStatus } = this.props;
 
-    render() {
-        const isLoaded = this.state.isLoaded;
+    if (isLoaded === false) {
+      return null; // note you can also return null here to render nothingNoEventsView />;
+    } 
+      const { UserInfo, selectedGroup } = this.state;
 
-        if (isLoaded === false) {
-            return null; // note you can also return null here to render nothingNoEventsView />;
-        } else {
-            const selectedGroup = this.state.selectedGroup;
-            const UserInfo = this.state.UserInfo;
+      return (
+        <div className="group-section">
+          <div className="group-inner">
+            {/* Top Container */}
+            <div className="group-top-container">
+              <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
+            </div>
 
-            return (
-                <div className="group-section">
-                    <div className="group-inner">
-                        {/* Top Container */}
-                        <div className="group-top-container">
-                            <StatusBox
-                                DailyResultStatus={
-                                    this.props._DailyResultStatus
-                                }
-                                UserInfo={UserInfo}
-                            />
-                        </div>
+            {/* Bottom Container */}
+            <div className="group-bottom-container">
+              {/* Category Button Box */}
+              <div className="button-box">
+                <CategoryButtons
+                  buttonStats={buttonStats}
+                  currentPath="/Report/Group"
+                  selected={selected}
+                  clickHandler={this.onClickCategoryButtons}
+                />
+              </div>
 
-                        {/* Bottom Container */}
-                        <div className="group-bottom-container">
-                            {/* Category Button Box */}
-                            <div className="button-box">
-                                <CategoryButtons
-                                    buttonStats={buttonStats}
-                                    currentPath={`/Report/Group`}
-                                    selected={this.state.selected}
-                                    clickHandler={this.onClickCategoryButtons}
-                                />
-                            </div>
+              {/* Group Select Form */}
+              <div className="group-select-box">{this.selectGroupForm()}</div>
 
-                            {/* Group Select Form */}
-                            <div className="group-select-box">
-                                {this.selectGroupForm()}
-                            </div>
+              <Switch>
+                {/* Router */}
+                <Route
+                  exact
+                  path="/Report/Group"
+                  render={() => <Redirect to="/Report/Group/DailyResult" />}
+                />
 
-                            <Switch>
-                                {/* Router */}
-                                <Route
-                                    exact
-                                    path="/Report/Group"
-                                    render={() => (
-                                        <Redirect to="/Report/Group/DailyResult" />
-                                    )}
-                                />
+                <Route
+                  path="/Report/Group/DailyResult"
+                  render={() => (
+                    <GroupDailyResult
+                      DailyResultData={this.getGroupData(selectedGroup)}
+                      WeeklyResultData={WeeklyResultData}
+                      MonthlyResultData={MonthlyResultData}
+                    />
+                  )}
+                />
 
-                                <Route
-                                    path={`/Report/Group/DailyResult`}
-                                    render={props => (
-                                        <GroupDailyResult
-                                            DailyResultData={this.getGroupData(
-                                                selectedGroup,
-                                            )}
-                                            WeeklyResultData={WeeklyResultData}
-                                            MonthlyResultData={
-                                                MonthlyResultData
-                                            }
-                                        />
-                                    )}
-                                />
-
-                                <Route
-                                    path={`/Report/Group/Map`}
-                                    render={props => (
-                                        <GroupMap
-                                            GroupResultData={MonthlyResultData}
-                                            DeviceResultData={WeeklyResultData}
-                                        />
-                                    )}
-                                />
-                            </Switch>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-    }
+                <Route
+                  path="/Report/Group/Map"
+                  render={() => (
+                    <GroupMap
+                      GroupResultData={MonthlyResultData}
+                      DeviceResultData={WeeklyResultData}
+                    />
+                  )}
+                />
+              </Switch>
+            </div>
+          </div>
+        </div>
+      );
+    
+  }
 }
 
-let mapStateToProps = state => {
-    return {
-        _DailyResultData: state.dailyDataUpdater.DailyResultData,
-        _DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
-    };
+const mapStateToProps = state => {
+  return {
+    DailyResultData: state.dailyDataUpdater.DailyResultData,
+    DailyResultStatus: state.dailyDataUpdater.DailyResultStatus,
+  };
 };
 
-let mapDispatchToProps = dispatch => {
-    return {
-        _onUpdateDailyResult: dailyResult =>
-            dispatch(updateDailyResult(dailyResult)),
-        _onUpdateDailyStatus: dailyStatus =>
-            dispatch(updateDailyStatus(dailyStatus)),
-        _resetAllDate: () => dispatch(resetDailyDatas()),
-    };
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpdateDailyResult: dailyResult => dispatch(updateDailyResult(dailyResult)),
+    onUpdateDailyStatus: dailyStatus => dispatch(updateDailyStatus(dailyStatus)),
+    resetAllDate: () => dispatch(resetDailyDatas()),
+  };
 };
 
-ReportGroup = connect(mapStateToProps, mapDispatchToProps,)(ReportGroup);
+ReportGroup.propTypes = {
+  onUpdateDailyResult: PropTypes.func.isRequired,
+  onUpdateDailyStatus: PropTypes.func.isRequired,
+
+  DailyResultData: PropTypes.object,
+  DailyResultStatus: PropTypes.object,
+
+  history: PropTypes.object.isRequired,
+};
+
+ReportGroup.defaultProps = {
+  DailyResultData: undefined,
+  DailyResultStatus: undefined,
+};
+
+
+ReportGroup = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ReportGroup);
+
 
 export default ReportGroup;

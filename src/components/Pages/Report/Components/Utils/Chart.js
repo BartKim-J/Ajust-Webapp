@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Chart from 'chart.js';
 
 Chart.defaults.LineWithLine = Chart.defaults.line;
@@ -7,8 +8,12 @@ Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 
     if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
       const activePoint = this.chart.tooltip._active[0];
-      const { ctx } = this.chart;
-      const { x } = activePoint.tooltipPosition();
+      const {
+        ctx
+      } = this.chart;
+      const {
+        x
+      } = activePoint.tooltipPosition();
       const topY = this.chart.scales['y-axis-0'].top;
       const bottomY = this.chart.scales['y-axis-0'].bottom;
 

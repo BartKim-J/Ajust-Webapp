@@ -1,12 +1,11 @@
-/* eslint-disable no-unused-vars */
-// Standard Import
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import DatePicker from 'react-datepicker'
+import DatePicker from 'react-datepicker';
 
-import "./Stylesheet/react-datepicker.scss";
+import './Stylesheet/react-datepicker.scss';
 
-class DayPickRange extends Component {
+export class DayPickRange extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -15,40 +14,49 @@ class DayPickRange extends Component {
   }
 
   handleChangeStart(startDate) {
-    this.props.onDateChange(startDate, this.props.dateRange.endDate);
+    const { onDateChange, dateRange } = this.props;
+    onDateChange(startDate, dateRange.endDate);
   }
 
   handleChangeEnd(endDate) {
-    this.props.onDateChange(this.props.dateRange.startDate, endDate);
+    const { onDateChange, dateRange } = this.props;
+    onDateChange(dateRange.startDate, endDate);
   }
 
   render() {
+    const { dateRange } = this.props;
+
     return (
       <div className="day-pick-range">
         <span className="start-date">
           <DatePicker
-            selected={this.props.dateRange.startDate}
+            selected={dateRange.startDate}
             selectsStart
-            startDate={this.props.dateRange.startDate}
-            endDate={this.props.dateRange.endDate}
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
             onChange={this.handleChangeStart}
             popperPlacement="auto-right"
           />
         </span>
         <span className="end-date">
           <DatePicker
-            selected={this.props.dateRange.endDate}
+            selected={dateRange.endDate}
             selectsEnd
-            startDate={this.props.dateRange.startDate}
-            endDate={this.props.dateRange.endDate}
+            startDate={dateRange.startDate}
+            endDate={dateRange.endDate}
             onChange={this.handleChangeEnd}
-            minDate={this.props.dateRange.startDate}
+            minDate={dateRange.startDate}
             popperPlacement="auto-right"
           />
         </span>
       </div>
     );
   }
+}
+
+DayPickRange.propTypes = {
+  dateRange: PropTypes.object.isRequired,
+  onDateChange: PropTypes.func.isRequired,
 }
 
 export default DayPickRange;
