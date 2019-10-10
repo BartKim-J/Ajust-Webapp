@@ -35,8 +35,6 @@ class ReportDepartment extends Component {
 
     this.onClickCategoryButtons = this.onClickCategoryButtons.bind(this);
 
-    console.log(this.props);
-    
     const { onUpdateDailyResult, onUpdateDailyStatus } = this.props;
     
     this.onUpdateDailyResult = onUpdateDailyResult.bind(this);
@@ -47,11 +45,9 @@ class ReportDepartment extends Component {
   componentDidMount() {
     this.getDailyData();
 
-    /*
     setInterval(async () => {
       this.getDailyData();
     }, 1000);
-    */
   }
   
 
@@ -78,7 +74,6 @@ class ReportDepartment extends Component {
     const { isLoaded, selected } = this.state;
     const { DailyResultData, DailyResultStatus } = this.props;
 
-    console.log(this.state);
     if (isLoaded === false) {
       return null; // note you can also return null here to render nothingNoEventsView />;
     }

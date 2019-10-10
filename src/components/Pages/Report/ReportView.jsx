@@ -15,14 +15,15 @@ class ReportView extends Component {
     super(props);
     this.state = {
       currentPath: '/Report',
+      defaultCategory: '/Department',
     };
   }
 
   componentDidMount() {
     const { history } = this.props;
-    const { currentPath } = this.state;
+    const { currentPath, defaultCategory } = this.state;
 
-    history.push(`${currentPath}/`);
+    history.push(`${currentPath}${defaultCategory}`);
   }
 
   render() {
@@ -31,13 +32,13 @@ class ReportView extends Component {
         <div className="report-inner">
           <Switch>
             <Route path="/Report/Hospital" component={ReportHospital} />
-            <Route path="/Report/Hospital/:category" component={ReportDepartment} />
+            <Route path="/Report/Hospital/:category" component={ReportHospital} />
 
             <Route path="/Report/Department" component={ReportDepartment} />
             <Route path="/Report/Department/:category" component={ReportDepartment} />
 
             <Route path="/Report/Group" component={ReportGroup} />
-            <Route path="/Report/Group/:category" component={ReportDepartment} />
+            <Route path="/Report/Group/:category" component={ReportGroup} />
           </Switch>
         </div>
       </div>

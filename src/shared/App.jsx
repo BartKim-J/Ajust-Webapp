@@ -10,7 +10,7 @@ import {
   ErrorView,
 } from 'components/Pages/PageIndex';
 
-import  NavMenu from 'components/Layouts/Menu/NavMenu';
+import NavMenu from 'components/Layouts/Menu/NavMenu';
 import SideMenu from 'components/Layouts/Menu/SideMenu';
 
 // Style Sheets
@@ -38,9 +38,7 @@ class App extends PureComponent {
                 <Route exact path="/" render={() => <Redirect to="/Report" />} />
                 <Route path="/Report" component={ReportView} />
                 <Route path="/Report/:view" component={ReportView} />
-                {/*
-                                    <Route path="/Setting" component={SettingView} />
-                                */}
+                {/* <Route path="/Setting" component={SettingView} /> */}
                 <Route path="/Analysis" component={AnalysisView} />
 
                 <Route component={ErrorView} />

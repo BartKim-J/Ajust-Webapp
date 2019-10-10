@@ -1,37 +1,56 @@
-@import "configure/componentsConfig.scss";
-@import "configure/mediaConfig.scss";
+@import 'configure/componentsConfig.scss';
+@import 'configure/mediaConfig.scss';
 
-// card design.
-.card {
-  background: #353b46 !important;
-  border: 0px solid #353b46 !important;
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  // card design.
+  .card {
+    background: #353b46 !important;
+    border: 0px solid #353b46 !important;
 
-  transition-duration: 0.3s;
-  transform: scale(0.9);
+    transition-duration: 0.3s;
+    transform: scale(0.9);
 
-  .stats-small__label {
-    color: white;
-    opacity: 0.8;
+    .stats-small__label {
+      color: white;
+      opacity: 0.8;
 
-    font-size: 1.5vh !important;
-  }
-  .stats-small__value {
-    color: white;
-    opacity: 1;
-    font-size: 4vh !important;
-  }
-
-  /*
-  .stats-small__percentage--increase {
-    color: #7ed321;
+      font-size: 1.5vh !important;
+    }
+    .stats-small__value {
+      color: white;
+      opacity: 1;
+      font-size: 4vh !important;
+    }
   }
 
-  .stats-small__percentage--decrease {
-    color: #ff0000;
+  .card:hover {
+    transform: scale(1.1);
   }
-  */
 }
 
-.card:hover {
-  transform: scale(1.1)
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  // card design.
+  .card {
+    background: #353b46 !important;
+    border: 0px solid #353b46 !important;
+
+    transition-duration: 0.3s;
+    transform: scale(0.9);
+
+    .stats-small__label {
+      color: white;
+      opacity: 0.8;
+
+      font-size: 1.5vh !important;
+    }
+    .stats-small__value {
+      color: white;
+      opacity: 1;
+      font-size: 4vh !important;
+    }
+  }
+
+  .card:hover {
+    transform: scale(1.1);
+  }
 }

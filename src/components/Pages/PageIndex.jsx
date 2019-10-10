@@ -1,5 +1,4 @@
 // Report
-
 export { default as ReportView } from 'components/Pages/Report/ReportView';
 export {
     default as ReportHospital,

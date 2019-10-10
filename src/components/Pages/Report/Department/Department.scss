@@ -1,62 +1,115 @@
-@import "configure/componentsConfig.scss";
-@import "configure/mediaConfig.scss";
-
+@import 'configure/componentsConfig.scss';
+@import 'configure/mediaConfig.scss';
 
 @keyframes TopToBottom {
-  0%   { transform: translateY(-100%); }
-  70%  { transform: translateY(-5%); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @keyframes BottomToTop {
-  0%   { transform: translateY(120%); }
-  70%  {  transform: translateY(15%); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(120%);
+  }
+  70% {
+    transform: translateY(15%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-/**
-    Report/Department Stylesheet
-**/
-.department-section {
-  min-width: $media-width-desktop;
-
-  width: 100%;
-  height: 100%;
-
-  background: #555d6b;
-
-  transition-duration: 1s;
-
-  .department-inner {
-    position: relative;
-
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .department-section {
     width: 100%;
     height: 100%;
 
-    .department-top-container {
+    background: #555d6b;
+
+    transition-duration: 1s;
+
+    .department-inner {
       position: relative;
 
       width: 100%;
-      height: 30vh;
+      height: 100%;
 
-      background: #555d6b;
+      .department-top-container {
+        position: relative;
 
-      animation: 1.0s ease TopToBottom;
+        width: 100%;
+        height: 30vh;
+
+        background: #555d6b;
+
+        animation: 1s ease TopToBottom;
+      }
+
+      .department-bottom-container {
+        position: relative;
+
+        width: 100%;
+        height: 65vh;
+
+        background: #353b46;
+
+        animation: 1s ease BottomToTop;
+
+        .button-box {
+          position: absolute;
+          top: -4.2vh;
+        }
+      }
     }
+  }
+}
 
-    .department-bottom-container {
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .department-section {
+    width: 100%;
+    height: 100%;
+
+    background: #555d6b;
+
+    transition-duration: 1s;
+
+    .department-inner {
       position: relative;
 
       width: 100%;
-      height: 65vh;
+      height: 100%;
 
-      background: #353b46;
+      .department-top-container {
+        position: relative;
 
-      animation: 1.0s ease BottomToTop;
+        width: 100%;
+        height: 30vh;
 
-      .button-box {
-        position: absolute;
-        top: -4.2vh;
+        background: #555d6b;
+
+        animation: 1s ease TopToBottom;
+      }
+
+      .department-bottom-container {
+        position: relative;
+
+        width: 100%;
+        height: 65vh;
+
+        background: #353b46;
+
+        animation: 1s ease BottomToTop;
+
+        .button-box {
+          position: absolute;
+          top: -4.2vh;
+        }
       }
     }
   }

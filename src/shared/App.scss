@@ -1,18 +1,39 @@
-@import "configure/mediaConfig.scss";
-@import "configure/componentsConfig.scss";
+@import 'configure/mediaConfig.scss';
+@import 'configure/componentsConfig.scss';
 
-.out-container {
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .out-container {
     position: relative;
     width: 100vw;
     height: 100vh;
 
     overflow: hidden;
-}
+  }
 
-.inner-container {
+  .inner-container {
+    width: 100vw - 6.3vw;
     position: relative;
+  }
+
+  .contents {
+    display: block;
+  }
 }
 
-.contents {
-    padding-right: $sidermenu-width;
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .out-container {
+    position: relative;
+    width: 100vw - 6.3vw;
+    height: 100vh;
+
+    overflow: scroll;
+  }
+
+  .inner-container {
+    position: relative;
+  }
+
+  .contents {
+    display: block;
+  }
 }

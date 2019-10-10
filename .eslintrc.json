@@ -20,13 +20,20 @@
   "plugins": ["react"],
   "rules": {
     "strict": 0,
-    "import/no-unresolved": "off",
-    "react/destructuring-assignment": "off",
+    // "import/no-unresolved": "off",
+    // "react/destructuring-assignment": "off",
     "react/jsx-props-no-spreading": "off",
     "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-vars": "warn",
-    "no-console": "off",
+    // "no-console": "off",
     "no-class-assign": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

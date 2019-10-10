@@ -36,8 +36,6 @@ class RangePieChart extends Component {
     super(props);
     this.state = {};
 
-    console.log(this.props)
-
     const { dataChange } = this.props;
     
     this.dataChange = dataChange;

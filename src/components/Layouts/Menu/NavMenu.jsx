@@ -5,7 +5,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 import ImgLogo from './Images/Logo@3x.png';
 
-export class NavMenu extends PureComponent {
+class NavMenu extends PureComponent {
   render() {
     return (
       <div className="nav_var-wrap">

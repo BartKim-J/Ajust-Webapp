@@ -21,7 +21,7 @@ class CategoryButtons extends Component {
 
   render() {
     const { selected, currentPath, buttonStats } = this.props;
-    console.log(this.props)
+    
     const Buttons = buttonStats.map((stats, idx) => {
       const ButtonClasses = classNames(`category-button${selected === idx ? '--selected' : ''}`);
 

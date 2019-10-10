@@ -45,8 +45,6 @@ class Map extends PureComponent {
 
     const { onUpdateWeekRange, onUpdateMonthRange } = this.props;
 
-    console.log(this.props)
-
     this.onUpdateWeekRange = onUpdateWeekRange.bind(this);
     this.onUpdateMonthRange = onUpdateMonthRange.bind(this);
   }

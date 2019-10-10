@@ -47,8 +47,6 @@ class AnalysisData extends Component {
     this.setState({
       selected: value,
     });
-
-    console.log(value);
   }
 
   render() {

@@ -26,7 +26,7 @@ class SideMenu extends Component {
 
   componentDidMount() {
     const { pageWrapId } = this.props;
-    this.closeMenu(pageWrapId, '64px', '6vh');
+    this.closeMenu(pageWrapId, '6.3vw', '6vh');
   }
 
   openMenu = (pageWrapId, width, height) => {
@@ -65,9 +65,9 @@ class SideMenu extends Component {
               }}
               onToggle={isOpen => {
                 if (isOpen) {
-                  this.openMenu(pageWrapId, '320px', '6vh');
+                  this.openMenu(pageWrapId, '25vw', '6vh');
                 } else {
-                  this.closeMenu(pageWrapId, '64px', '6vh');
+                  this.closeMenu(pageWrapId, '6.3vw', '6vh');
                 }
               }}
             >

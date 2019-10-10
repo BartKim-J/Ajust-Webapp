@@ -99,8 +99,6 @@ class ReportGroup extends Component {
 
     this.setState({ selectedGroup: event.target.value });
     history.push(`${history.location.pathname}?${event.target.value}`);
-
-    console.log(history);
   }
 
   getGroupData(index) {

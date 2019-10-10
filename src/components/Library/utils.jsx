@@ -103,8 +103,6 @@ function getDailyData() {
         })
         .then(async UserInfoResponse => {
           [ UserInfo, ] = UserInfoResponse.data;
-          
-          console.log(UserInfo);
 
           axios
             .get('http://18.182.122.117:8000/api/ajusty/', {
@@ -129,8 +127,8 @@ function getDailyData() {
                     logByGroup = AjustyDailyViewResponse.data;
                   })
                   .catch(error => {
-                    console.log(error);
-                  }); // ERROR
+                    // console.log(error);
+                  });
 
                 const promisesAxiosAjustyLog = logByGroup.map(async (logs, hourIndex) => {
                   dataByGroup[hourIndex] = logs.length;
@@ -138,7 +136,6 @@ function getDailyData() {
                   if (dataByTime[hourIndex] === undefined) dataByTime[hourIndex] = 0;
                   dataByTime[hourIndex] += dataByGroup[hourIndex];
 
-                  // Correcting date by total
                   dataByTotal += dataByGroup[hourIndex];
                   if (hourIndex === parseInt(REALTIME, 10)) {
                     dataByRealTime += dataByGroup[hourIndex];
@@ -274,16 +271,16 @@ function getDailyData() {
               }
             })
             .catch(error => {
-              console.log(error);
-            }); // ERROR
+              // console.log(error);
+            });
         })
         .catch(error => {
-          console.log(error);
-        }); // ERROR
+          // console.log(error);
+        });
     })
     .catch(error => {
-      console.log(error);
-    }); // ERROR
+      // console.log(error);
+    });
 }
 
 export { pad, getDailyData };
