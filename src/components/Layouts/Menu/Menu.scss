@@ -1,54 +1,53 @@
-@import "configure/mediaConfig.scss";
-@import "configure/componentsConfig.scss";
- 
- /*************************
+@import 'configure/mediaConfig.scss';
+@import 'configure/componentsConfig.scss';
+
+/*************************
  * 
  * Navigation Var Menu
  *
  *************************/
 
 .nav_var-wrap {
-    position: fixed;
-    z-index: 1006;
+  position: fixed;
+  z-index: 1006;
 
-    width: 100vw;
-    height: $navmenu-height;    
+  width: 100vw;
+  height: $navmenu-height;
 
-    .nav_var {
-        position: relative;
-        height: $navmenu-height;    
-        background-color: #e2e2e2;
-    }
-    
-    .navbar-brand {
-        position: absolute;
-        left: 4.6vw;
-    }
+  .nav_var {
+    position: relative;
+    height: $navmenu-height;
+    background-color: #e2e2e2;
+  }
 
-    .nav_menu-logo {
-        margin-top: 0.3vh;
-        height: 2.6vh;
-    }
+  .navbar-brand {
+    position: absolute;
+    left: 4.6vw;
+  }
 
-    .nav_menu-items {
-        position: absolute;
-        right: 3vw;
-    }
+  .nav_menu-logo {
+    margin-top: 0.3vh;
+    height: 2.6vh;
+  }
 
-    .nav_menu-item {
-        margin-top: 0.4vh;
-        font-size: 1.4vh;
+  .nav_menu-items {
+    position: absolute;
+    right: 3vw;
+  }
 
-        color: #353b46 !important;
-        text-decoration: none !important;
+  .nav_menu-item {
+    margin-top: 0.4vh;
+    font-size: 1.4vh;
 
+    color: #353b46 !important;
+    text-decoration: none !important;
 
-        // vertical line on right of item
-        //border-right-style: 1vw solid;
-        //border-color: black;
+    // vertical line on right of item
+    //border-right-style: 1vw solid;
+    //border-color: black;
 
-        margin-left: 4vw;
-    }
+    margin-left: 4vw;
+  }
 }
 /*************************
  * 
@@ -56,24 +55,49 @@
  *
  *************************/
 
- .side_var-item {
-    font-size: 15px;
- }
-
- .side_bar-item-icon {
-    padding-top: 2.4px;
- }
-
- .side_bar-item-icon img {
-    width: 26px;
- }
-
-
- .side_var-item-title {
-    font-size: 15px;
- }
-
- .side_var-item-text {
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .side_var-item {
     font-size: 12px;
-    margin-left: 52px;
- }
+  }
+
+  .side_bar-item-icon {
+    padding-top: 0.2vh;
+  }
+
+  .side_bar-item-icon img {
+    max-width: 32px;
+    width: 2.5vw;
+  }
+
+  .side_var-item-title {
+    font-size: 15px;
+  }
+
+  .side_var-item-text {
+    font-size: 12px;
+  }
+}
+
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+    .side_var-item {
+      font-size: 12px;
+    }
+  
+    .side_bar-item-icon {
+      padding-top: 0.2vh;
+    }
+  
+    .side_bar-item-icon img {
+      max-width: 32px;
+      width: 2.5vw;
+    }
+  
+    .side_var-item-title {
+      font-size: 15px;
+    }
+  
+    .side_var-item-text {
+      font-size: 12px;;
+    }
+  }
+  

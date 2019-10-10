@@ -1,16 +1,34 @@
 @import 'configure/componentsConfig.scss';
 @import 'configure/mediaConfig.scss';
 
-.report-view {
-  width: 100%;
-  height: 100%;
-
-  background: white;
-
-  .report-inner {
-    position: relative;
-
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .report-view {
     width: 100%;
     height: 100%;
+
+    background: white;
+
+    .report-inner {
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .report-view {
+    width: 100%;
+    height: 100%;
+
+    background: white;
+
+    .report-inner {
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+    }
   }
 }

@@ -1,14 +1,12 @@
 @import "configure/componentsConfig.scss";
 @import "configure/mediaConfig.scss";
 
-/**
-    Group List Stylesheet
-**/
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
 .group-list-container {
     position: relative;
   
     width: 100%;
-    height: 100%; //height: 55vh;
+    height: 100%;
   
     .group-list-inner {
       position: relative;
@@ -47,6 +45,57 @@
     
           margin-right: 5%;
           margin-bottom: 5%;
+        }
+      }
+    }
+  }
+}
+
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .group-list-container {
+      position: relative;
+    
+      width: 100%;
+      height: 100%;
+    
+      .group-list-inner {
+        position: relative;
+    
+        width: 100%;
+        height: 100%;
+        
+        .group-list-chart-box {
+          overflow: scroll;
+          position: relative;
+  
+          top: 6vh;
+  
+          width: 95%;
+          height: 100%;
+  
+          margin: 0% 3%;
+  
+  
+          display: flex;
+          flex-flow: row wrap;
+  
+          .group-list-chart-title {
+            font-size: 2vh;
+            color: white;
+  
+            margin-left: 2vw;
+            margin-bottom: 2vh;
+          }
+  
+          .group-list-chart {
+            position: relative;
+  
+            width: 45%;
+            height: 65%;
+      
+            margin-right: 5%;
+            margin-bottom: 5%;
+          }
         }
       }
     }

@@ -153,7 +153,7 @@ class GroupList extends Component {
 }
 
 GroupList.propTypes = {
-  GroupDatas: PropTypes.object.isRequired,
+  GroupDatas: PropTypes.array.isRequired,
 };
 
 GroupList.defaultProps = {

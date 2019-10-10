@@ -150,10 +150,10 @@ class StatusBox extends Component {
     return (
       <div className="status-chart">
         <div className="status-chart-inner">
-          <Container fluid className="status-boxs px-4">
+          <Container fluid className="status-boxs">
             <Row>
               {this.smallStatsForm().map((stats, idx) => (
-                <Col className="col-lg mb-4" key={stats.label} {...stats.attrs}>
+                <Col className="col-lg mb-6 sm-6" key={stats.label} {...stats.attrs}>
                   <SmallStats
                     id={`small-stats-${idx}`}
                     variation="1"

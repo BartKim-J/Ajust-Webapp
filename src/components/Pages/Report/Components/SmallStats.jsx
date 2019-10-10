@@ -5,13 +5,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames'
-  ;
+import classNames from 'classnames';
 import shortid from 'shortid';
 
-import { Card, CardBody } from "shards-react";
+import { Card, CardBody } from 'shards-react';
 
-import Chart from "./Utils/Chart";
+import Chart from './Utils/Chart';
 import './Stylesheet/SmallStatus.scss';
 
 class SmallStats extends React.Component {
@@ -27,28 +26,28 @@ class SmallStats extends React.Component {
         maintainAspectRatio: true,
         responsive: true,
         legend: {
-          display: false
+          display: false,
         },
         tooltips: {
           enabled: false,
-          custom: false
+          custom: false,
         },
         elements: {
           point: {
-            radius: 0
+            radius: 0,
           },
           line: {
-            tension: 0.33
-          }
+            tension: 0.33,
+          },
         },
         scales: {
           xAxes: [
             {
               gridLines: false,
               ticks: {
-                display: false
-              }
-            }
+                display: false,
+              },
+            },
           ],
           yAxes: [
             {
@@ -59,29 +58,29 @@ class SmallStats extends React.Component {
                 isplay: false,
                 // Avoid getting the graph line cut of at the top of the canvas.
                 // Chart.js bug link: https://github.com/chartjs/Chart.js/issues/4790
-                suggestedMax: Math.max(...this.props.chartData[0].data) + 1
-              }
-            }
-          ]
-        }
+                suggestedMax: Math.max(...this.props.chartData[0].data) + 1,
+              },
+            },
+          ],
+        },
       },
-      ...this.props.chartOptions
+      ...this.props.chartOptions,
     };
 
     const chartConfig = {
       ...{
-        type: "line",
+        type: 'line',
         data: {
           ...{
-            labels: this.props.chartLabels
+            labels: this.props.chartLabels,
           },
           ...{
-            datasets: this.props.chartData
-          }
+            datasets: this.props.chartData,
+          },
         },
-        options: chartOptions
+        options: chartOptions,
       },
-      ...this.props.chartConfig
+      ...this.props.chartConfig,
     };
 
     new Chart(this.canvasRef.current, chartConfig);
@@ -90,48 +89,40 @@ class SmallStats extends React.Component {
   render() {
     const { variation, label, value, percentage, increase } = this.props;
 
-    const cardClasses = classNames(
-      "stats-small",
-      variation && `stats-small--${variation}`
-    );
+    const cardClasses = classNames('stats-small', variation && `stats-small--${variation}`);
 
-    const cardBodyClasses = classNames(
-      variation === "1" ? "p-0 d-flex" : "px-0 pb-0"
-    );
+    const cardBodyClasses = classNames(variation === '1' ? 'p-0 d-flex' : 'px-0 pb-0');
 
     const innerWrapperClasses = classNames(
-      "d-flex",
-      variation === "1" ? "flex-column m-auto" : "px-3"
+      'd-flex',
+      variation === '1' ? 'flex-column m-auto' : 'px-3',
     );
 
-    const dataFieldClasses = classNames(
-      "stats-small__data",
-      variation === "1" && "text-center"
-    );
+    const dataFieldClasses = classNames('stats-small__data', variation === '1' && 'text-center');
 
     const labelClasses = classNames(
-      "stats-small__label",
-      "text-uppercase",
-      variation !== "1" && "mb-1"
+      'stats-small__label',
+      'text-uppercase',
+      variation !== '1' && 'mb-1',
     );
 
     const valueClasses = classNames(
-      "stats-small__value",
-      "count",
-      variation === "1" ? "my-3" : "m-0"
+      'stats-small__value',
+      'count',
+      variation === '1' ? 'my-3' : 'm-0',
     );
 
     const innerDataFieldClasses = classNames(
-      "stats-small__data",
-      variation !== "1" && "text-right align-items-center"
+      'stats-small__data',
+      variation !== '1' && 'text-right align-items-center',
     );
 
     const percentageClasses = classNames(
-      "stats-small__percentage",
-      `stats-small__percentage--${increase ? "increase" : "decrease"}`
+      'stats-small__percentage',
+      `stats-small__percentage--${increase ? 'increase' : 'decrease'}`,
     );
 
-    const canvasHeight = variation === "1" ? 120 : 60;
+    const canvasHeight = variation === '1' ? 120 : 60;
 
     return (
       <Card small className={cardClasses}>
@@ -192,18 +183,18 @@ SmallStats.propTypes = {
   /**
    * The chart labels.
    */
-  chartLabels: PropTypes.array
+  chartLabels: PropTypes.array,
 };
 
 SmallStats.defaultProps = {
   increase: true,
   percentage: 0,
   value: 0,
-  label: "Label",
+  label: 'Label',
   chartOptions: Object.create(null),
   chartConfig: Object.create(null),
   chartData: [],
-  chartLabels: []
+  chartLabels: [],
 };
 
 export default SmallStats;

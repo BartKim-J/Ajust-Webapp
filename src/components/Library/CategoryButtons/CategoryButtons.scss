@@ -1,52 +1,102 @@
-@import "configure/componentsConfig.scss";
-@import "configure/mediaConfig.scss";
+@import 'configure/componentsConfig.scss';
+@import 'configure/mediaConfig.scss';
 
-.category-button-box {
-  position: relative;
 
-  button {
-    outline: none;
-    cursor: pointer;
-  }
-
-  .category-button {
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .category-button-box {
     position: relative;
 
-    background: none;
-    border: none;
-
-    margin-left: -0.3vh;
-
-    opacity: 0.6;
-
-    transition-duration: 0.5s;
-
-    .category-name {
-      position: absolute;
-      top: 0vh;
-      left: 47%;
-      transform: translate(-47%, 0);
-
-      font-size: 1.6vh;
-      text-align: center;
-      line-height: 5vh;
-
-      color: white;
+    button {
+      outline: none;
+      cursor: pointer;
     }
 
-    &:hover {
-      transition-duration: 0.3s;
-      opacity: 1;
+    .category-button {
+      position: relative;
+
+      background: none;
+      border: none;
+
+      margin-left: -0.3vh;
+
+      opacity: 0.6;
+
+      transition-duration: 0.5s;
+
+      .category-name {
+        position: absolute;
+        top: 0vh;
+        left: 47%;
+        transform: translate(-47%, 0);
+
+        font-size: 1.6vh;
+        text-align: center;
+        line-height: 5vh;
+
+        color: white;
+      }
+
+      &:hover {
+        transition-duration: 0.3s;
+        opacity: 1;
+      }
+    }
+
+    img {
+      height: 4.2vh;
     }
   }
+}
 
-  .category-button--selected {
-    @extend .category-button;
 
-    opacity: 1;
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .category-button-box {
+    position: relative;
+
+    button {
+      outline: none;
+      cursor: pointer;
+    }
+
+    .category-button {
+      position: relative;
+
+      background: none;
+      border: none;
+
+      margin-left: -0.3vh;
+
+      opacity: 0.6;
+
+      transition-duration: 0.5s;
+
+      .category-name {
+        position: absolute;
+        top: 0vh;
+        left: 47%;
+        transform: translate(-47%, 0);
+
+        font-size: 1.6vh;
+        text-align: center;
+        line-height: 5vh;
+
+        color: white;
+      }
+
+      &:hover {
+        transition-duration: 0.3s;
+        opacity: 1;
+      }
+    }
+
+    img {
+      height: 4.2vh;
+    }
   }
+}
 
-  img {
-    height: 4.2vh;
-  }
+.category-button--selected {
+  @extend .category-button;
+
+  opacity: 1;
 }

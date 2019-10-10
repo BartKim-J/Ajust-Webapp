@@ -1,27 +1,59 @@
-@import "configure/componentsConfig.scss";
-@import "configure/mediaConfig.scss";
-
-.status-chart {
-  position: relative;
-
-  width: 100%;
-  height: 100%;
-
-  background: #555d6b;
-
-  .status-chart-inner {
+@import 'configure/componentsConfig.scss';
+@import 'configure/mediaConfig.scss';
+@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .status-chart {
     position: relative;
 
     width: 100%;
     height: 100%;
 
-    .status-boxs {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    padding: 5vh 5vw;
 
-      width: 93vw;
+    background: #555d6b;
+
+    .status-chart-inner {
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+
+      .status-boxs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 93vw;
+      }
+    }
+  }
+}
+
+@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+  .status-chart {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 5vh 5vw;
+    
+    background: #555d6b;
+
+    .status-chart-inner {
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+
+      .status-boxs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 80vw;
+      }
     }
   }
 }

@@ -22,31 +22,31 @@ class SideMenu extends Component {
 
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.initMenu = this.initMenu.bind(this);
   }
 
   componentDidMount() {
     const { pageWrapId } = this.props;
-    this.closeMenu(pageWrapId, '6.3vw', '6vh');
+    this.initMenu(pageWrapId);
   }
 
-  openMenu = (pageWrapId, width, height) => {
+  initMenu = (pageWrapId) => {
     const elms = document.getElementById(pageWrapId);
-
-    elms.style.paddingLeft = {
-      width,
-    };
-    elms.style.transform = `translate3d(${width}, ${height}, 0px)`;
-    elms.style.transition = `all .15s ease 0s`;
+    elms.classList.add('sidenav--wrap---close');
   }
 
-  closeMenu = (pageWrapId, width, height) => {
+  openMenu = (pageWrapId) => {
+    const elms = document.getElementById(pageWrapId);
+    
+    elms.classList.toggle('sidenav--wrap---open');
+    elms.classList.toggle('sidenav--wrap---close');
+  }
+
+  closeMenu = (pageWrapId) => {
     const elms = document.getElementById(pageWrapId);
 
-    elms.style.paddingLeft = {
-      width,
-    };
-    elms.style.transform = `translate3d(${width}, ${height}, 0px)`;
-    elms.style.transition = `all .15s ease 0s`;
+    elms.classList.toggle('sidenav--wrap---close');
+    elms.classList.toggle('sidenav--wrap---open');
   }
 
   render() {
@@ -65,9 +65,9 @@ class SideMenu extends Component {
               }}
               onToggle={isOpen => {
                 if (isOpen) {
-                  this.openMenu(pageWrapId, '25vw', '6vh');
+                  this.openMenu(pageWrapId);
                 } else {
-                  this.closeMenu(pageWrapId, '6.3vw', '6vh');
+                  this.closeMenu(pageWrapId);
                 }
               }}
             >

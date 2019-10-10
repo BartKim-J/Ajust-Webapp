@@ -11,7 +11,7 @@
   }
 
   .inner-container {
-    width: 100vw - 6.3vw;
+    width: calc(100vw - 64px);
     position: relative;
   }
 
@@ -23,13 +23,14 @@
 @media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
   .out-container {
     position: relative;
-    width: 100vw - 6.3vw;
+    width: 100vw;
     height: 100vh;
 
-    overflow: scroll;
+    overflow: hidden;
   }
 
   .inner-container {
+    width: 100vw - 6.3vw;
     position: relative;
   }
 
