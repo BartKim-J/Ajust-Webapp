@@ -15,7 +15,7 @@ import StatusBox from 'components/Pages/Report/Components/StatusBox';
 import DailyResult from './DailyResult/DailyResult';
 import GroupList from './GroupList/GroupList';
 import Map from './Map/Map';
- 
+
 import './Department.scss';
 
 const buttonStats = [
@@ -36,7 +36,7 @@ class ReportDepartment extends Component {
     this.onClickCategoryButtons = this.onClickCategoryButtons.bind(this);
 
     const { onUpdateDailyResult, onUpdateDailyStatus } = this.props;
-    
+
     this.onUpdateDailyResult = onUpdateDailyResult.bind(this);
     this.onUpdateDailyStatus = onUpdateDailyStatus.bind(this);
     this.getDailyData = getDailyData.bind(this);
@@ -49,7 +49,6 @@ class ReportDepartment extends Component {
       this.getDailyData();
     }, 1000);
   }
-  
 
   shouldComponentUpdate(nextProps, nextState) {
     const { isLoaded, selected } = this.state;
@@ -66,9 +65,9 @@ class ReportDepartment extends Component {
     return false;
   }
 
-  onClickCategoryButtons = (value) => {
+  onClickCategoryButtons = value => {
     this.setState({ selected: value });
-  }
+  };
 
   render() {
     const { isLoaded, selected } = this.state;
@@ -86,9 +85,7 @@ class ReportDepartment extends Component {
           {/* Status Boxs */}
           <div className="department-top-container">
             <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
-          </div>
-
-          <div className="department-bottom-container">
+            
             {/* Category Buttons */}
             <div className="button-box">
               <CategoryButtons
@@ -98,7 +95,9 @@ class ReportDepartment extends Component {
                 clickHandler={this.onClickCategoryButtons}
               />
             </div>
+          </div>
 
+          <div className="department-bottom-container">
             {/* Router */}
             <Switch>
               <Route
@@ -107,19 +106,14 @@ class ReportDepartment extends Component {
                 render={() => <Redirect to="/Report/Department/DailyResult" />}
               />
 
-              <Route
-                exact
-                path="/Report/Department/DailyResult"
-                render={() => <DailyResult />}
-              />
+              <Route exact path="/Report/Department/DailyResult" render={() => <DailyResult />} />
 
               <Route
                 path="/Report/Department/GroupList"
                 render={() => <GroupList GroupDatas={GroupDatasets} />}
               />
-              
-              <Route path="/Report/Department/Map" render={() => <Map />} />
 
+              <Route path="/Report/Department/Map" render={() => <Map />} />
             </Switch>
           </div>
         </div>
@@ -154,7 +148,7 @@ ReportDepartment.propTypes = {
 ReportDepartment.defaultProps = {
   DailyResultData: undefined,
   DailyResultStatus: undefined,
-}
+};
 
 ReportDepartment = connect(
   mapStateToProps,

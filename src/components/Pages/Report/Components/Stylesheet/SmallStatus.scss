@@ -14,17 +14,17 @@
       color: white;
       opacity: 0.8;
 
-      font-size: 1.5vh !important;
+      font-size: 1em !important;
     }
     .stats-small__value {
       color: white;
       opacity: 1;
-      font-size: 4vh !important;
+      font-size: 2em !important;
     }
   }
 
   .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.0);
   }
 }
 
@@ -39,18 +39,18 @@
 
     .stats-small__label {
       color: white;
-      opacity: 0.8;
+      opacity: 0.9;
 
-      font-size: 1.5vh !important;
+      font-size: 1em !important;
     }
     .stats-small__value {
       color: white;
       opacity: 1;
-      font-size: 4vh !important;
+      font-size: 2em !important;
     }
   }
 
   .card:hover {
-    transform: scale(1.1);
+    transform: scale(1.0);
   }
 }

@@ -7,11 +7,11 @@
     width: 100vw;
     height: 100vh;
 
-    overflow: hidden;
+    overflow: scroll;
   }
 
   .inner-container {
-    width: calc(100vw - 64px);
+    width: calc(100vw - 64.1px);
     position: relative;
   }
 
@@ -26,7 +26,7 @@
     width: 100vw;
     height: 100vh;
 
-    overflow: hidden;
+    overflow: scroll;
   }
 
   .inner-container {

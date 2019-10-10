@@ -28,14 +28,14 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width: 10px; /* 세로축 스크롤바 길이 */
-  height: 16px; /* 가로축 스크롤바 길이 */
+  width: 10px;
+  height: 16px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #353b46;
+  display:none;
 }
 ::-webkit-scrollbar-track-piece {
-  background-color: #353b46;
+  display:none;
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
@@ -53,7 +53,7 @@ button {
   background-color: #353b46; 
 }
 ::-webkit-scrollbar-corner {
-  background-color: #353b46;
+  display:none;
 }
 ::-webkit-resizer {
   background-color: #353b46;
