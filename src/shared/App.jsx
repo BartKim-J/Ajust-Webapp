@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   ReportView,
   // SettingView,
-  AnalysisView,
+  // AnalysisView,
   ErrorView,
 } from 'components/Pages/PageIndex';
 
@@ -37,9 +37,8 @@ class App extends PureComponent {
               <Switch>
                 <Route exact path="/" render={() => <Redirect to="/Report" />} />
                 <Route path="/Report" component={ReportView} />
-                <Route path="/Report/:view" component={ReportView} />
                 {/* <Route path="/Setting" component={SettingView} /> */}
-                <Route path="/Analysis" component={AnalysisView} />
+                {/* <Route path="/Analysis" component={AnalysisView} /> */}
 
                 <Route component={ErrorView} />
               </Switch>

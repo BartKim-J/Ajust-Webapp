@@ -1,13 +1,13 @@
 @import 'configure/mediaConfig.scss';
 @import 'configure/componentsConfig.scss';
 
-@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+@media all and (min-width: $media-width-desktop-min) and (max-width: $media-width-desktop) {
   .out-container {
     position: relative;
     width: 100vw;
     height: 100vh;
 
-    overflow: scroll;
+    overflow: hidden;
   }
 
   .inner-container {
@@ -20,7 +20,27 @@
   }
 }
 
-@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+@media all and (min-width: $media-width-tablet-min) and (max-width: $media-width-tablet) {
+  .out-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    overflow: scroll;
+  }
+
+  .inner-container {
+    width: 100vw - 6.3vw;
+    position: relative;
+  }
+
+  .contents {
+    display: block;
+  }
+}
+
+
+@media all and (min-width: $media-width-mobile-min) and (max-width: $media-width-mobile) {
   .out-container {
     position: relative;
     width: 100vw;

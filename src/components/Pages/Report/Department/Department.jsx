@@ -7,6 +7,8 @@ import 'shards-ui/dist/css/shards.min.css';
 import { connect } from 'react-redux';
 import { updateDailyResult, updateDailyStatus, resetDailyDatas } from 'actions';
 
+import LoadingView from 'components/Layouts/Loading/Loading';
+
 import CategoryButtons from 'components/Library/CategoryButtons/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 
@@ -47,7 +49,7 @@ class ReportDepartment extends Component {
 
     setInterval(async () => {
       this.getDailyData();
-    }, 1000);
+    }, 2000);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -74,7 +76,9 @@ class ReportDepartment extends Component {
     const { DailyResultData, DailyResultStatus } = this.props;
 
     if (isLoaded === false) {
-      return null; // note you can also return null here to render nothingNoEventsView />;
+      return (
+        <LoadingView />
+      );
     }
     const GroupDatasets = DailyResultData.datasets;
     const { UserInfo } = this.state;

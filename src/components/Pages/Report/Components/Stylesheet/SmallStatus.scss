@@ -1,7 +1,7 @@
 @import 'configure/componentsConfig.scss';
 @import 'configure/mediaConfig.scss';
 
-@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+@media all and (min-width: $media-width-desktop-min) and (max-width: $media-width-desktop) {
   // card design.
   .card {
     background: #353b46 !important;
@@ -28,7 +28,7 @@
   }
 }
 
-@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+@media all and (min-width: $media-width-tablet-min) and (max-width: $media-width-tablet) {
   // card design.
   .card {
     background: #353b46 !important;
@@ -52,5 +52,32 @@
 
   .card:hover {
     transform: scale(1.0);
+  }
+}
+
+@media all and (min-width: $media-width-mobile-min) and (max-width: $media-width-mobile) {
+  // card design.
+  .card {
+    background: #353b46 !important;
+    border: 0px solid #353b46 !important;
+
+    transition-duration: 0.3s;
+    transform: scale(0.7);
+
+    .stats-small__label {
+      color: white;
+      opacity: 0.9;
+
+      font-size: 1em !important;
+    }
+    .stats-small__value {
+      color: white;
+      opacity: 1;
+      font-size: 2em !important;
+    }
+  }
+
+  .card:hover {
+    transform: scale(0.7);
   }
 }

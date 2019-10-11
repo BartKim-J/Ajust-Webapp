@@ -8,6 +8,8 @@ import 'shards-ui/dist/css/shards.min.css';
 import { connect } from 'react-redux';
 import { updateDailyResult, updateDailyStatus, resetDailyDatas } from 'actions';
 
+import LoadingView from 'components/Layouts/Loading/Loading';
+
 import CategoryButtons from 'components/Library/CategoryButtons/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 import StatusBox from '../Components/StatusBox';
@@ -106,7 +108,7 @@ class ReportGroup extends Component {
 
     const retDailyResultData = {
       type: 'bar',
-      labels:  DailyResultData.labels,
+      labels: DailyResultData.labels,
       datasets: [DailyResultData.datasets[index]],
     };
 
@@ -133,67 +135,66 @@ class ReportGroup extends Component {
     const { DailyResultStatus } = this.props;
 
     if (isLoaded === false) {
-      return null; // note you can also return null here to render nothingNoEventsView />;
-    } 
-      const { UserInfo, selectedGroup } = this.state;
+      return <LoadingView />;
+    }
+    const { UserInfo, selectedGroup } = this.state;
 
-      return (
-        <div className="group-section">
-          <div className="group-inner">
-            {/* Top Container */}
-            <div className="group-top-container">
-              <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
-            </div>
+    return (
+      <div className="group-section">
+        <div className="group-inner">
+          {/* Top Container */}
+          <div className="group-top-container">
+            <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
 
-            {/* Bottom Container */}
-            <div className="group-bottom-container">
-              {/* Category Button Box */}
-              <div className="button-box">
-                <CategoryButtons
-                  buttonStats={buttonStats}
-                  currentPath="/Report/Group"
-                  selected={selected}
-                  clickHandler={this.onClickCategoryButtons}
-                />
-              </div>
-
-              {/* Group Select Form */}
-              <div className="group-select-box">{this.selectGroupForm()}</div>
-
-              <Switch>
-                {/* Router */}
-                <Route
-                  exact
-                  path="/Report/Group"
-                  render={() => <Redirect to="/Report/Group/DailyResult" />}
-                />
-
-                <Route
-                  path="/Report/Group/DailyResult"
-                  render={() => (
-                    <GroupDailyResult
-                      DailyResultData={this.getGroupData(selectedGroup)}
-                      WeeklyResultData={WeeklyResultData}
-                      MonthlyResultData={MonthlyResultData}
-                    />
-                  )}
-                />
-
-                <Route
-                  path="/Report/Group/Map"
-                  render={() => (
-                    <GroupMap
-                      GroupResultData={MonthlyResultData}
-                      DeviceResultData={WeeklyResultData}
-                    />
-                  )}
-                />
-              </Switch>
+            {/* Category Button Box */}
+            <div className="button-box">
+              <CategoryButtons
+                buttonStats={buttonStats}
+                currentPath="/Report/Group"
+                selected={selected}
+                clickHandler={this.onClickCategoryButtons}
+              />
             </div>
           </div>
+
+          {/* Bottom Container */}
+          <div className="group-bottom-container">
+            {/* Group Select Form */}
+            <div className="group-select-box">{this.selectGroupForm()}</div>
+
+            <Switch>
+              {/* Router */}
+              <Route
+                exact
+                path="/Report/Group"
+                render={() => <Redirect to="/Report/Group/DailyResult" />}
+              />
+
+              <Route
+                path="/Report/Group/DailyResult"
+                render={() => (
+                  <GroupDailyResult
+                    DailyResultData={this.getGroupData(selectedGroup)}
+                    WeeklyResultData={WeeklyResultData}
+                    MonthlyResultData={MonthlyResultData}
+                  />
+                )}
+              />
+
+              <Route
+                path="/Report/Group/Map"
+                render={() => (
+                  <GroupMap
+                    GroupResultData={MonthlyResultData}
+                    DeviceResultData={WeeklyResultData}
+                  />
+                )}
+              />
+            </Switch>
+          </div>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 
@@ -227,11 +228,9 @@ ReportGroup.defaultProps = {
   DailyResultStatus: undefined,
 };
 
-
 ReportGroup = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(ReportGroup);
-
 
 export default ReportGroup;

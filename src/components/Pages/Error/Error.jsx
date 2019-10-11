@@ -5,7 +5,7 @@ import 'shards-ui/dist/css/shards.min.css';
 
 import './Error.scss';
 
-class ReportView extends Component {
+class ErrorView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,21 +15,23 @@ class ReportView extends Component {
 
   componentDidMount() {
     const { history } = this.props;
-    const {currentPath } = this.state
+    const { currentPath } = this.state;
     history.push(`${currentPath}`);
   }
 
   render() {
     return (
       <div className="error-view">
-        <div className="error-inner">404 not found.</div>
+        <div className="error-inner">
+          <div className="error-box">404 not found</div>
+        </div>
       </div>
     );
   }
 }
 
-ReportView.propTypes = {
+ErrorView.propTypes = {
   history: PropTypes.object.isRequired,
-}
+};
 
-export default ReportView;
+export default ErrorView;

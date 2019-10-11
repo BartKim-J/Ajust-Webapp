@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from 'shards-react';
+import { Container, Row } from 'shards-react';
 
 import { connect } from 'react-redux';
 
@@ -153,7 +153,7 @@ class StatusBox extends Component {
           <Container fluid className="status-boxs">
             <Row>
               {this.smallStatsForm().map((stats, idx) => (
-                <Col className="col-lg mb-6 sm-6" key={stats.label} {...stats.attrs}>
+                <div className="col-lg-2 col-md-3 col-sm-4" key={stats.label} {...stats.attrs}>
                   <SmallStats
                     id={`small-stats-${idx}`}
                     variation="1"
@@ -165,7 +165,7 @@ class StatusBox extends Component {
                     increase={stats.increase}
                     decrease={stats.decrease}
                   />
-                </Col>
+                </div>
               ))}
             </Row>
           </Container>

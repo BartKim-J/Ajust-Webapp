@@ -1,9 +1,17 @@
-$media-width-mobile: 480px;
-$media-width-mobile-min: 280px;
-
-$media-width-tablet: 1025px;
-
-$media-width-desktop: 1025px;
-
+$media-width-min: 380px;
 $media-width-max: 9999px;
+
+// Mobile 280 ~ 768 
+$media-width-mobile-min: 0px;
+$media-width-mobile: 768px;
+
+// Tablet 769 ~ 1024
+$media-width-tablet-min: $media-width-mobile + 1px;
+$media-width-tablet: 1024px;
+
+// Desktop 1025 ~ 9999
+$media-width-desktop-min: $media-width-tablet + 1px;
+// $media-width-desktop: 1920px;
+$media-width-desktop: $media-width-max;
+
 

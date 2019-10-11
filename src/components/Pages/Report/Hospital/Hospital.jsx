@@ -7,6 +7,8 @@ import 'shards-ui/dist/css/shards.min.css';
 import { connect } from 'react-redux';
 import { updateDailyResult, updateDailyStatus, resetDailyDatas } from 'actions';
 
+import LoadingView from 'components/Layouts/Loading/Loading';
+
 import CategoryButtons from 'components/Library/CategoryButtons/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 import StatusBox from '../Components/StatusBox';
@@ -55,43 +57,42 @@ class ReportHospital extends Component {
   render() {
     const { isLoaded, selected } = this.state;
     const { DailyResultStatus } = this.props;
-    
+
     if (isLoaded === false) {
-      return null; // note you can also return null here to render nothingNoEventsView />;
-    } 
-      // const GroupDatasets = this.props._DailyResultData.datasets;
-      const {UserInfo} = this.state;
+      return <LoadingView />;
+    }
+    // const GroupDatasets = this.props._DailyResultData.datasets;
+    const { UserInfo } = this.state;
 
-      return (
-        <div className="hospital-section">
-          <div className="hospital-inner">
-            {/* Status Boxs */}
-            <div className="hospital-top-container">
-              <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
-            </div>
+    return (
+      <div className="hospital-section">
+        <div className="hospital-inner">
+          {/* Status Boxs */}
+          <div className="hospital-top-container">
+            <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
 
-            <div className="hospital-bottom-container">
-              <div className="button-box">
-                <CategoryButtons
-                  buttonStats={buttonStats}
-                  currentPath="/Report/Hospital"
-                  selected={selected}
-                  clickHandler={this.onClickCategoryButtons}
-                />
-              </div>
-
-              <Switch>
-                <Route
-                  exact
-                  path="/Report/Hospital"
-                  render={() => <Redirect to="/Report/Hospital/?" />}
-                />
-              </Switch>
+            <div className="button-box">
+              <CategoryButtons
+                buttonStats={buttonStats}
+                currentPath="/Report/Hospital"
+                selected={selected}
+                clickHandler={this.onClickCategoryButtons}
+              />
             </div>
           </div>
+
+          <div className="hospital-bottom-container">
+            <Switch>
+              <Route
+                exact
+                path="/Report/Hospital"
+                render={() => <Redirect to="/Report/Hospital/?" />}
+              />
+            </Switch>
+          </div>
         </div>
-      );
-    
+      </div>
+    );
   }
 }
 
@@ -111,10 +112,17 @@ const mapDispatchToProps = dispatch => {
 };
 
 ReportHospital.propTypes = {
-  onUpdateDailyResult: PropTypes.func.isRequired,
-  onUpdateDailyStatus: PropTypes.func.isRequired,
+  onUpdateDailyResult: PropTypes.func,
+  onUpdateDailyStatus: PropTypes.func,
 
-  DailyResultStatus: PropTypes.object.isRequired,
+  DailyResultStatus: PropTypes.object,
+};
+
+ReportHospital.defaultProps = {
+  onUpdateDailyResult: undefined,
+  onUpdateDailyStatus: undefined,
+
+  DailyResultStatus: undefined,
 };
 
 ReportHospital = connect(

@@ -55,7 +55,7 @@
  *
  *************************/
 
-@media all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+ @media all and (min-width: $media-width-desktop-min) and (max-width: $media-width-desktop) {
   .side_var-item {
     font-size: 12px;
   }
@@ -78,26 +78,50 @@
   }
 }
 
-@media not all and (min-width: $media-width-tablet) and (max-width: $media-width-max) {
+@media all and (min-width: $media-width-tablet-min) and (max-width: $media-width-tablet) {
+  .side_var-item {
+    font-size: 12px;
+  }
+
+  .side_bar-item-icon {
+    padding-top: 0.2vh;
+  }
+
+  .side_bar-item-icon img {
+    max-width: 32px;
+    width: 2.5vw;
+  }
+
+  .side_var-item-title {
+    font-size: 15px;
+  }
+
+  .side_var-item-text {
+    font-size: 12px;
+  }
+}
+
+@media all and (min-width: $media-width-mobile-min) and (max-width: $media-width-mobile) {
     .side_var-item {
       font-size: 12px;
     }
   
     .side_bar-item-icon {
-      padding-top: 0.2vh;
+      padding-top: 0.0vh;
     }
   
     .side_bar-item-icon img {
       max-width: 32px;
-      width: 2.5vw;
+      width: 1em;
     }
   
     .side_var-item-title {
-      font-size: 15px;
+      padding-left: 1em;
+      font-size: 1em;
     }
   
     .side_var-item-text {
-      font-size: 12px;;
+      font-size: 0.8em;
     }
   }
   
