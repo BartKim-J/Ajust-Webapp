@@ -3,14 +3,14 @@ $media-width-max: 9999px;
 
 // Mobile 280 ~ 768 
 $media-width-mobile-min: 0px;
-$media-width-mobile: 768px;
+$media-width-mobile: 768px - 1px;
 
 // Tablet 769 ~ 1024
-$media-width-tablet-min: $media-width-mobile + 1px;
-$media-width-tablet: 1024px;
+$media-width-tablet-min: $media-width-mobile;
+$media-width-tablet: 1025px - 1px;
 
 // Desktop 1025 ~ 9999
-$media-width-desktop-min: $media-width-tablet + 1px;
+$media-width-desktop-min: $media-width-tablet;
 // $media-width-desktop: 1920px;
 $media-width-desktop: $media-width-max;
 
