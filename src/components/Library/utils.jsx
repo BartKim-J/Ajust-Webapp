@@ -79,6 +79,7 @@ function getDailyData() {
   // let ajusterLog = Array(timeMap.length);
 
   let UserInfo = {};
+  let RealtimeData = {};
   let DailyResultData = {};
   let DailyResultStatus = {};
 
@@ -102,7 +103,7 @@ function getDailyData() {
           headers,
         })
         .then(async UserInfoResponse => {
-          [ UserInfo, ] = UserInfoResponse.data;
+          [UserInfo] = UserInfoResponse.data;
 
           axios
             .get('http://18.182.122.117:8000/api/ajusty/', {
@@ -131,30 +132,42 @@ function getDailyData() {
                   });
 
                 const promisesAxiosAjustyLog = logByGroup.map(async (logs, hourIndex) => {
-                  dataByGroup[hourIndex] = logs.length;
+                  let KoreanHourIndex = hourIndex;
 
-                  if (dataByTime[hourIndex] === undefined) dataByTime[hourIndex] = 0;
-                  dataByTime[hourIndex] += dataByGroup[hourIndex];
+                  KoreanHourIndex += 9;
+                  if (KoreanHourIndex >= 24) {
+                    KoreanHourIndex -= 24;
+                  }
 
-                  dataByTotal += dataByGroup[hourIndex];
-                  if (hourIndex === parseInt(REALTIME, 10)) {
-                    dataByRealTime += dataByGroup[hourIndex];
+                  dataByGroup[KoreanHourIndex] = logs.length;
+
+                  if (dataByTime[KoreanHourIndex] === undefined) dataByTime[KoreanHourIndex] = 0;
+                  dataByTime[KoreanHourIndex] += dataByGroup[KoreanHourIndex];
+
+                  const cutMinute = 2.5;
+
+                  dataByTotal += dataByGroup[KoreanHourIndex];
+                  if (KoreanHourIndex === parseInt(REALTIME, 10)) {
+                    dataByRealTime += dataByGroup[KoreanHourIndex];
 
                     if (logByGroup[hourIndex] !== undefined) {
-                      logByGroup[hourIndex].forEach((log) => {
-                        for (let min = 0; min < 60 / 2.5; min += 1) {
+                      // logByGroup[hourIndex].forEach(log => {
+                      logByGroup[hourIndex].map((log) => {
+                        for (let min = 0; min < 60 / cutMinute; min += 1) {
                           if (dataByRealTimeData[min] === undefined) {
                             dataByRealTimeData.splice(min, 0, 0);
                           }
                           if (
-                            parseInt(log.pushed_at.substring(14, 16), 10) >= min * 2.5 &&
-                            parseInt(log.pushed_at.substring(14, 16), 10) < min * 2.5 + 2.5
+                            parseInt(log.pushed_at.substring(14, 16), 10) >= min * cutMinute &&
+                            parseInt(log.pushed_at.substring(14, 16), 10) <
+                              min * cutMinute + cutMinute
                           ) {
                             dataByRealTimeData.splice(min, 1, dataByRealTimeData[min] + 1);
-                            // break;
                           }
                         }
-                      })
+
+                        return log;
+                      });
                     }
                   }
                 });
@@ -214,6 +227,7 @@ function getDailyData() {
                 type: 'bar',
                 // labels: ["6:00~", "7:00~", "8:00~", "9:00~", "10:00~", "11:00~", "12:00~", "13:00~", "14:00~", "15:00~", "16:00~", "17:00~", "18:00~", "19:00~"],
                 labels: [
+                  '0:00~',
                   '1:00~',
                   '2:00~',
                   '3:00~',
@@ -237,9 +251,40 @@ function getDailyData() {
                   '21:00~',
                   '22:00~',
                   '23:00~',
-                  '24:00~',
                 ],
                 datasets: DailyDatasets,
+              };
+
+              RealtimeData = {
+                type: 'bar',
+                // labels: ["6:00~", "7:00~", "8:00~", "9:00~", "10:00~", "11:00~", "12:00~", "13:00~", "14:00~", "15:00~", "16:00~", "17:00~", "18:00~", "19:00~"],
+                labels: [
+                  '0:00~',
+                  '1:00~',
+                  '2:00~',
+                  '3:00~',
+                  '4:00~',
+                  '5:00~',
+                  '6:00~',
+                  '7:00~',
+                  '8:00~',
+                  '9:00~',
+                  '10:00~',
+                  '11:00~',
+                  '12:00~',
+                  '13:00~',
+                  '14:00~',
+                  '15:00~',
+                  '16:00~',
+                  '17:00~',
+                  '18:00~',
+                  '19:00~',
+                  '20:00~',
+                  '21:00~',
+                  '22:00~',
+                  '23:00~',
+                ],
+                datasets: RealtimeDatasets,
               };
 
               DailyResultStatus = {
@@ -247,6 +292,7 @@ function getDailyData() {
                 dataByTotal,
                 dataByRealTime,
                 dataByRealTimeData,
+                RealtimeData,
               };
 
               if (

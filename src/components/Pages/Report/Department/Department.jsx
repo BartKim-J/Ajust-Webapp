@@ -15,6 +15,7 @@ import { getDailyData } from 'components/Library/utils';
 import StatusBox from 'components/Pages/Report/Components/StatusBox';
 
 import DailyResult from './DailyResult/DailyResult';
+import Realtime from './Realtime/Realtime';
 import GroupList from './GroupList/GroupList';
 import Map from './Map/Map';
 
@@ -22,6 +23,7 @@ import './Department.scss';
 
 const buttonStats = [
   { label: 'Daily Results', link: 'DailyResult' },
+  { label: 'Realtime', link: 'Realtime' },
   { label: 'Group List', link: 'GroupList' },
   { label: 'Map', link: 'Map' },
 ];
@@ -76,9 +78,7 @@ class ReportDepartment extends Component {
     const { DailyResultData, DailyResultStatus } = this.props;
 
     if (isLoaded === false) {
-      return (
-        <LoadingView />
-      );
+      return <LoadingView />;
     }
     const GroupDatasets = DailyResultData.datasets;
     const { UserInfo } = this.state;
@@ -89,7 +89,7 @@ class ReportDepartment extends Component {
           {/* Status Boxs */}
           <div className="department-top-container">
             <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
-            
+
             {/* Category Buttons */}
             <div className="button-box">
               <CategoryButtons
@@ -110,7 +110,9 @@ class ReportDepartment extends Component {
                 render={() => <Redirect to="/Report/Department/DailyResult" />}
               />
 
-              <Route exact path="/Report/Department/DailyResult" render={() => <DailyResult />} />
+              <Route path="/Report/Department/DailyResult" render={() => <DailyResult />} />
+
+              <Route path="/Report/Department/Realtime" render={() => <Realtime />} />
 
               <Route
                 path="/Report/Department/GroupList"

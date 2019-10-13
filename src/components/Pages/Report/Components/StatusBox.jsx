@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row } from 'shards-react';
+import { Container, Row, Col } from 'shards-react';
 
 import { connect } from 'react-redux';
 
@@ -8,17 +8,16 @@ import './Stylesheet/StatusBox.scss';
 import SmallStats from './SmallStats';
 
 const SmallStateAttrs = {
-  md: '4',
-  sm: '6',
-  lg: '0',
+  md: '3',
+  sm: '4',
+  lg: '2',
 };
 
 class StatusBox extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
 
     this.smallStatsForm = this.smallStatsForm.bind(this);
   }
@@ -153,7 +152,7 @@ class StatusBox extends Component {
           <Container fluid className="status-boxs">
             <Row>
               {this.smallStatsForm().map((stats, idx) => (
-                <div className="col-lg-2 col-md-3 col-sm-4" key={stats.label} {...stats.attrs}>
+                <Col key={stats.label} {...stats.attrs}>
                   <SmallStats
                     id={`small-stats-${idx}`}
                     variation="1"
@@ -165,7 +164,7 @@ class StatusBox extends Component {
                     increase={stats.increase}
                     decrease={stats.decrease}
                   />
-                </div>
+                </Col>
               ))}
             </Row>
           </Container>
@@ -185,10 +184,8 @@ const mapStateToProps = state => {
 StatusBox.propTypes = {
   UserInfo: PropTypes.object.isRequired,
   DailyResultStatus: PropTypes.object.isRequired,
-}
+};
 
-StatusBox = connect(
-  mapStateToProps,
-)(StatusBox);
+StatusBox = connect(mapStateToProps)(StatusBox);
 
-export default StatusBox
+export default StatusBox;
