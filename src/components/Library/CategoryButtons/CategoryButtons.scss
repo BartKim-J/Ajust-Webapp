@@ -6,6 +6,7 @@
     position: relative;
     top: 3.6px;
 
+    max-height: 3.6em;
     button {
       outline: none;
       cursor: pointer;
@@ -54,6 +55,7 @@
     position: relative;
     top: 3.6px;
 
+    max-height: 2.3em;
     button {
       outline: none;
       cursor: pointer;
@@ -100,7 +102,7 @@
   .category-button-box {
     position: relative;
     top: 3.6px;
-
+    max-height: 1.2em;
     button {
       outline: none;
       cursor: pointer;

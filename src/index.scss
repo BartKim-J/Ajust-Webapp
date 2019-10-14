@@ -47,14 +47,18 @@ button {
   height: 6px;
 }
 ::-webkit-scrollbar-button:start {
-  background-color: #353b46;
+  background-color: #555d6b;
+  display: none;
 }
 ::-webkit-scrollbar-button:end {
-  background-color: #353b46; 
+  background-color: #555d6b; 
+  display: none;
 }
 ::-webkit-scrollbar-corner {
-  display:none;
+  background-color: #555d6b;
+  display: none;
 }
 ::-webkit-resizer {
-  background-color: #353b46;
+  background-color: #555d6b;
+  display: none;
 }
