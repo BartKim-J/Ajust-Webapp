@@ -1,54 +1,132 @@
-$fontPath : "resource/Fonts";
+$fontPath: 'resource/Fonts';
 
+$fontAll: 'S-CoreDream', 'S-CoreDream-Ltd' 'S-CoreDream-Bold', 'S-CoreDream-1', 'S-CoreDream-2',
+  'S-CoreDream-3', 'S-CoreDream-4', 'S-CoreDream-5', 'S-CoreDream-6', 'S-CoreDream-7',
+  'S-CoreDream-8', 'S-CoreDream-9', 'NanumGothic', 'NanumSquare', 'NanumSquareBold';
 
-/* BM HANNA Pro Fonts */
-@font-face{
-    font-family:"BMHANNAPro";
-    src:url('#{$fontPath}/BM/BMHANNAPro.woff')   format('woff'),
-        url('#{$fontPath}/BM/BMHANNAPro.ttf')    format('truetype'),
-        url('#{$fontPath}/BM/BMHANNAProOTF.otf') format('opentype');
-        //url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+/* NanumGothic Fonts */
+@font-face {
+  font-family: 'NanumGothic';
+  src: url('#{$fontPath}/NanumGothic/NanumGothic.eot') format('eot'),
+    url('#{$fontPath}/NanumGothic/NanumGothic.woff') format('woff');
 
-    font-weight:normal;
-    font-style:normal;
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* NanumSquare Fonts */
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('#{$fontPath}/NanumSquare/NanumSquareR.eot') format('eot'),
+    url('#{$fontPath}/NanumSquare/NanumSquareR.woff') format('woff');
 
-/* BM HANNA 11yrs Fonts */
-@font-face{
-    font-family:"BMHANNA_11yrs";
-    src:url('#{$fontPath}/BM/BMHANNA_11yrs.ttf')  format('truetype'),
-        url('#{$fontPath}/BM/BMHANNA_11yrs.woff') format('woff');
-
-    font-weight:normal;
-    font-style:normal;
+  font-weight: normal;
+  font-style: normal;
 }
-/* BM DOHYEON Fonts */
-@font-face{
-    font-family:"BMDOHYEON";
-    src:url('#{$fontPath}/BM/BMDOHYEON.otf')   format('otf'),
-        url('#{$fontPath}/BM/BMDOHYEON.woff')  format('woff'),
-        url('#{$fontPath}/BM/BMDOHYEON.woff2') format('woff2');
-        //url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
 
-    font-weight:normal;
-    font-style:normal;
+@font-face {
+  font-family: 'NanumSquareBold';
+  src: url('#{$fontPath}/NanumSquare/NanumSquareB.eot') format('eot'),
+    url('#{$fontPath}/NanumSquare/NanumSquareB.woff') format('woff'),
+    url('#{$fontPath}/NanumSquare/NanumSquareB.woff2') format('woff2');
+
+  font-weight: bold;
+  font-style: normal;
 }
-/* BM JUA Pro Fonts */
-@font-face{
-    font-family: "BMJUA";
-    src:url("#{$fontPath}/BM/BMJUA_ttf.ttf")  format('truetype'),
-        url("#{$fontPath}/BM/BMJUA_ttf.woff") format('woff');
 
-    font-weight: normal;
-    font-style: normal;
+/* S Core Dream Fonts */
+@font-face {
+  font-family: 'S-CoreDream-Ltd';
+  src: url('#{$fontPath}/SCoreDream/SCDream1.woff') format('woff');
+
+  font-weight: normal;
+  font-style: normal;
 }
-/* BM HANNA Pro Fonts */
-@font-face{
-    font-family:"NanumGothic";
-    src:url("#{$fontPath}/Nanum-web-font/NanumGothic.eot")  format('eot'),
-        url("#{$fontPath}/Nanum-web-font/NanumGothic.woff") format('woff');
 
-    font-weight:normal;
-    font-style:normal;
+@font-face {
+  font-family: 'S-CoreDream';
+  src: url('#{$fontPath}/SCoreDream/SCDream3.woff') format('woff');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-Bold';
+  src: url('#{$fontPath}/SCoreDream/SCDream6.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-1';
+  src: url('#{$fontPath}/SCoreDream/SCDream1.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-2';
+  src: url('#{$fontPath}/SCoreDream/SCDream2.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-3';
+  src: url('#{$fontPath}/SCoreDream/SCDream3.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-4';
+  src: url('#{$fontPath}/SCoreDream/SCDream4.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-5';
+  src: url('#{$fontPath}/SCoreDream/SCDream5.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-6';
+  src: url('#{$fontPath}/SCoreDream/SCDream6.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-7';
+  src: url('#{$fontPath}/SCoreDream/SCDream7.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-8';
+  src: url('#{$fontPath}/SCoreDream/SCDream8.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'S-CoreDream-9';
+  src: url('#{$fontPath}/SCoreDream/SCDream9.woff') format('woff');
+
+  font-weight: bold;
+  font-style: normal;
 }

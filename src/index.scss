@@ -1,64 +1,16 @@
 @import 'resource/Fonts/Fonts.scss'; // Fonts
 
 body {
-  margin: 0;
-  background-color: #555d6b;
+  width: 100%;
+  height: 100%;
 
-  font-family: 'BMDOHYEON', 'BMHANNAPro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 0 auto;
+
+  background-color: #555d6b;
+  color: #222222;
+
+  font-family: $fontAll, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-input {
-  border: none;
-  outline: none;
-}
-
-a {
-  outline: none;
-}
-
-button {
-  outline: none;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  height: 16px;
-}
-::-webkit-scrollbar-track {
-  display:none;
-}
-::-webkit-scrollbar-track-piece {
-  display:none;
-}
-::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: #20262c;
-}
-::-webkit-scrollbar-button {
-  background-color: #2e3034a8;
-  width: 8px;
-  height: 6px;
-}
-::-webkit-scrollbar-button:start {
-  background-color: #555d6b;
-  display: none;
-}
-::-webkit-scrollbar-button:end {
-  background-color: #555d6b; 
-  display: none;
-}
-::-webkit-scrollbar-corner {
-  background-color: #555d6b;
-  display: none;
-}
-::-webkit-resizer {
-  background-color: #555d6b;
-  display: none;
 }
