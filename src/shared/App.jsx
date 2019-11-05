@@ -13,13 +13,12 @@ import {
 import NavMenu from 'components/Layouts/Menu/NavMenu';
 import SideMenu from 'components/Layouts/Menu/SideMenu';
 
-// Style Sheets
 import './App.scss';
 import './Stylesheet/shards-dashboards.scss';
 
-// Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import styled from 'styled-components';
 
 import ajustApp from 'reducers';
 
@@ -29,11 +28,11 @@ class App extends PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <div id="outer-container" className="out-container">
+        <Styled.Section id="section">
           <NavMenu />
-          <SideMenu pageWrapId="page-wrap" outerContainerId="outer-container" />
-          <div id="page-wrap" className="inner-container">
-            <div id="contents" className="contents">
+          <SideMenu pageWrapId="container" outerContainerId="section" />
+          <Styled.Container id="container">
+            <Styled.Contents id="contents">
               <Switch>
                 <Route exact path="/" render={() => <Redirect to="/Report" />} />
                 <Route path="/Report" component={ReportView} />
@@ -42,12 +41,32 @@ class App extends PureComponent {
 
                 <Route component={ErrorView} />
               </Switch>
-            </div>
-          </div>
-        </div>
+            </Styled.Contents>
+          </Styled.Container>
+        </Styled.Section>
       </Provider>
     );
   }
 }
+
+const Styled = {};
+
+
+Styled.Section = styled.section`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+`;
+
+Styled.Container = styled.div`
+  width: calc(100vw - 64.1px);
+  position: relative;
+`;
+
+Styled.Contents = styled.div`
+  display: block;
+`;
 
 export default App;
