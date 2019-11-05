@@ -73,7 +73,7 @@ Styled.Container = styled.div`
 `;
 
 Styled.Content = styled.div`
-  min-height: calc(100% - 58px);
+  height: calc(100% - 58px);
 `;
 
 const GlobalStyle = styled.div`

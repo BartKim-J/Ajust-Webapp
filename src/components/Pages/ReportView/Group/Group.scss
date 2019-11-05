@@ -1,201 +1,65 @@
 @import 'configure/componentsConfig.scss';
 @import 'configure/mediaConfig.scss';
 
-@media all and (min-width: $media-width-desktop-min) and (max-width: $media-width-desktop) {
-  .group-section {
+.group-section {
+  width: 100%;
+  height: 100%;
+
+  .group-inner {
+    position: relative;
+
     width: 100%;
     height: 100%;
 
-    .group-inner {
+    background: #555d6b;
+
+    .group-top-container {
       position: relative;
 
       width: 100%;
-      height: 100%;
+      height: 25%;
 
       background: #555d6b;
 
-      .group-top-container {
-        position: relative;
+      animation: 1s ease TopToBottom;
 
-        width: 100%;
-        height: 23vh;
-
-        background: #555d6b;
-
-        animation: 1s ease TopToBottom;
-
-        .button-box {
-          position: absolute;
-          bottom: 0;
-        }
-      }
-
-      .group-bottom-container {
-        position: relative;
-
-        width: 100%;
-        height: 71vh;
-
-        background: #353b46;
-
-        animation: 1s ease BottomToTop;
-
-        .group-select-box {
-          position: absolute;
-          top: 3vh;
-          left: 5%;
-
-          z-index: 1006;
-
-          height: 5vh;
-          width: auto;
-
-          .group-select-form {
-            widows: 100% !important;
-            height: 100% !important;
-
-            background-color: #353b46;
-            border: none;
-            border-radius: 8px;
-            box-shadow: none;
-
-            color: white;
-            font-size: 2.5vh;
-          }
-        }
+      .button-box {
+        position: absolute;
+        bottom: 0;
       }
     }
-  }
-}
 
-@media all and (min-width: $media-width-tablet-min) and (max-width: $media-width-tablet) {
-  .group-section {
-    width: 100%;
-    height: 100%;
-
-    .group-inner {
+    .group-bottom-container {
       position: relative;
 
       width: 100%;
-      height: 100%;
+      height: 75%;
 
-      background: #555d6b;
+      background: #353b46;
 
-      .group-top-container {
-        position: relative;
+      animation: 1s ease BottomToTop;
 
-        width: 100%;
-        height: 23vh;
+      .group-select-box {
+        position: absolute;
+        top: 3vh;
+        left: 5%;
 
-        background: #555d6b;
+        z-index: 1006;
 
-        animation: 1s ease TopToBottom;
+        height: 5vh;
+        width: auto;
 
-        .button-box {
-          position: absolute;
-          bottom: 0;
-        }
-      }
+        .group-select-form {
+          widows: 100% !important;
+          height: 100% !important;
 
-      .group-bottom-container {
-        position: relative;
+          background-color: #353b46;
+          border: none;
+          border-radius: 8px;
+          box-shadow: none;
 
-        width: 100%;
-        height: 71vh;
-
-        background: #353b46;
-
-        animation: 1s ease BottomToTop;
-
-        .group-select-box {
-          position: absolute;
-          top: 3vh;
-          left: 5%;
-
-          z-index: 1006;
-
-          height: 5vh;
-          width: auto;
-
-          .group-select-form {
-            widows: 100% !important;
-            height: 100% !important;
-
-            background-color: #353b46;
-            border: none;
-            border-radius: 8px;
-            box-shadow: none;
-
-            color: white;
-            font-size: 2.5vh;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media all and (min-width: $media-width-mobile-min) and (max-width: $media-width-mobile) {
-  .group-section {
-    width: 100%;
-    height: 100%;
-
-    .group-inner {
-      position: relative;
-
-      width: 100%;
-      height: 100%;
-
-      background: #555d6b;
-
-      .group-top-container {
-        position: relative;
-
-        width: 100%;
-        height: 30vh;
-
-        background: #555d6b;
-
-        animation: 1s ease TopToBottom;
-
-        .button-box {
-          position: absolute;
-          bottom: 0;
-        }
-      }
-
-      .group-bottom-container {
-        position: relative;
-
-        width: 100%;
-        height: 64vh;
-
-        background: #353b46;
-
-        animation: 1s ease BottomToTop;
-
-        .group-select-box {
-          position: absolute;
-          top: 3vh;
-          left: 5%;
-
-          z-index: 1006;
-
-          height: 5vh;
-          width: auto;
-
-          .group-select-form {
-            widows: 100% !important;
-            height: 100% !important;
-
-            background-color: #353b46;
-            border: none;
-            border-radius: 8px;
-            box-shadow: none;
-
-            color: white;
-            font-size: 2.5vh;
-          }
+          color: white;
+          font-size: 2.5vh;
         }
       }
     }

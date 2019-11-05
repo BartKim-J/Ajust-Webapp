@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
+
+import mediaConf from 'configure/mediaConfig';
 
 import 'shards-ui/dist/css/shards.min.css';
 
 import ReportHospital from './Hospital';
 import ReportDepartment from './Department';
 import ReportGroup from './Group';
-
-import './ReportView.scss';
 
 class ReportView extends Component {
   constructor(props) {
@@ -28,8 +29,8 @@ class ReportView extends Component {
 
   render() {
     return (
-      <div className="report-view">
-        <div className="report-inner">
+      <Styled.Section>
+        <Styled.Container>
           <Switch>
             <Route path="/Report/Hospital" component={ReportHospital} />
             <Route path="/Report/Hospital/:category" component={ReportHospital} />
@@ -40,8 +41,8 @@ class ReportView extends Component {
             <Route path="/Report/Group" component={ReportGroup} />
             <Route path="/Report/Group/:category" component={ReportGroup} />
           </Switch>
-        </div>
-      </div>
+        </Styled.Container>
+      </Styled.Section>
     );
   }
 }
@@ -51,3 +52,18 @@ ReportView.propTypes = {
 };
 
 export default ReportView;
+
+const Styled = {};
+
+Styled.Section = styled.section`
+  width: 100%;
+  height: 100%;
+
+  background: white;
+`;
+Styled.Container = styled.div`
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+`;

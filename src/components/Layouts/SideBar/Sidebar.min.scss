@@ -20,11 +20,11 @@ $sidebar-subnav-animation-delay: 0.3s ease 0s;
 
 @media all and (min-width: $media-width-desktop-min) and (max-width: $media-width-desktop) {
   .sidenav--wrap---open {
-    transform: translate3d($sidebar-open-width-px, 6vh, 0px);
+    transform: translate3d($sidebar-open-width-px, $navmenu-height, 0px);
     transition: all 0.15s ease 0s;
   }
   .sidenav--wrap---close {
-    transform: translate3d($sidebar-close-width-px, 6vh, 0px);
+    transform: translate3d($sidebar-close-width-px, $navmenu-height, 0px);
     transition: all 0.15s ease 0s;
   }
 
@@ -511,11 +511,11 @@ $sidebar-subnav-animation-delay: 0.3s ease 0s;
 
 @media all and (min-width: $media-width-tablet-min) and (max-width: $media-width-tablet) {
   .sidenav--wrap---open {
-    transform: translate3d($sidebar-open-width, 6vh, 0px);
+    transform: translate3d($sidebar-open-width, $navmenu-height, 0px);
     transition: all 0.15s ease 0s;
   }
   .sidenav--wrap---close {
-    transform: translate3d($sidebar-close-width, 6vh, 0px);
+    transform: translate3d($sidebar-close-width, $navmenu-height, 0px);
     transition: all 0.15s ease 0s;
   }
 
@@ -1004,11 +1004,11 @@ $sidebar-subnav-animation-delay: 0.3s ease 0s;
 
 @media all and (min-width: $media-width-mobile-min) and (max-width: $media-width-mobile) {
   .sidenav--wrap---open {
-    transform: translate3d($sidebar-open-width-mobile, 6vh, 0px);
+    transform: translate3d($sidebar-open-width-mobile, $navmenu-height, 0px);
     transition: all 0.15s ease 0s;
   }
   .sidenav--wrap---close {
-    transform: translate3d($sidebar-close-width, 6vh, 0px);
+    transform: translate3d($sidebar-close-width, $navmenu-height, 0px);
     transition: all 0.15s ease 0s;
   }
 

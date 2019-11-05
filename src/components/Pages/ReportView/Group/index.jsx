@@ -14,8 +14,8 @@ import CategoryButtons from 'components/Library/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 import StatusBox from '../Components/StatusBox';
 
-import GroupDailyResult from './GroupDailyResult/GroupDailyResult';
-import { GroupMap } from './GroupMap/GroupMap';
+import GroupDailyResult from './GroupDailyResult';
+import { GroupMap } from './GroupMap';
 
 // Style Sheets
 import './Group.scss';
