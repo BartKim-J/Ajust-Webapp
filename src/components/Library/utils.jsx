@@ -39,7 +39,6 @@ function getDailyData() {
     .substring(0, 10);
   const TZ_OFFSET = '+09:00';
 
-  // let timeMap = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
   const timeMap = [
     0,
     1,
@@ -66,6 +65,37 @@ function getDailyData() {
     22,
     23,
   ];
+
+  const TimeLabels = [
+    '0:00~',
+    '1:00~',
+    '2:00~',
+    '3:00~',
+    '4:00~',
+    '5:00~',
+    '6:00~',
+    '7:00~',
+    '8:00~',
+    '9:00~',
+    '10:00~',
+    '11:00~',
+    '12:00~',
+    '13:00~',
+    '14:00~',
+    '15:00~',
+    '16:00~',
+    '17:00~',
+    '18:00~',
+    '19:00~',
+    '20:00~',
+    '21:00~',
+    '22:00~',
+    '23:00~',
+  ];
+
+  const START_TIME = 6;
+  const END_TIME = TimeLabels.length;
+
   let ajustyMap = [];
 
   const DailyDatasets = [];
@@ -76,12 +106,18 @@ function getDailyData() {
   let dataByRealTime = 0;
   const dataByRealTimeData = [];
 
-  // let ajusterLog = Array(timeMap.length);
-
   let UserInfo = {};
   let RealtimeData = {};
   let DailyResultData = {};
   let DailyResultStatus = {};
+
+  // const OptimalLevel = Array(TimeLabels.slice(START_TIME, END_TIME).length);
+  // const NormalLevel = Array(TimeLabels.slice(START_TIME, END_TIME).length);
+  // const WarnLevel = Array(TimeLabels.slice(START_TIME, END_TIME).length);
+
+  const NormalLevel = [1, 3, 3, 7, 7, 8, 8, 8, 8, 8, 8, 10, 10, 6, 6, 3, 3, 2, 1];
+  const WarnLevel = NormalLevel.map(item => item / 4);
+  const OptimalLevel = NormalLevel.map(item => item * 2);
 
   axios
     .post('http://18.182.122.117:8000/api/auth/login/', {
@@ -144,6 +180,7 @@ function getDailyData() {
                   if (dataByTime[KoreanHourIndex] === undefined) dataByTime[KoreanHourIndex] = 0;
                   dataByTime[KoreanHourIndex] += dataByGroup[KoreanHourIndex];
 
+                  // const cutMinute = 2.5;
                   const cutMinute = 2.5;
 
                   dataByTotal += dataByGroup[KoreanHourIndex];
@@ -152,7 +189,7 @@ function getDailyData() {
 
                     if (logByGroup[hourIndex] !== undefined) {
                       // logByGroup[hourIndex].forEach(log => {
-                      logByGroup[hourIndex].map((log) => {
+                      logByGroup[hourIndex].map(log => {
                         for (let min = 0; min < 60 / cutMinute; min += 1) {
                           if (dataByRealTimeData[min] === undefined) {
                             dataByRealTimeData.splice(min, 0, 0);
@@ -194,7 +231,7 @@ function getDailyData() {
                   borderWidth: 1,
                   borderColor: this.backgroundColor,
 
-                  data: dataByGroup,
+                  data: dataByGroup.slice(START_TIME, END_TIME),
                 };
 
                 RealtimeDatasets[ajustyIndex] = {
@@ -217,73 +254,60 @@ function getDailyData() {
                   borderWidth: 1,
                   borderColor: this.backgroundColor,
 
-                  data: dataByRealTimeData,
+                  data: dataByRealTimeData.slice(0, END_TIME),
                 };
               });
 
               await Promise.all(promisesAxiosAjusty);
 
+              DailyDatasets.push({
+                type: 'line',
+                label: 'Warning Level',
+
+                fill: false,
+                backgroundColor: 'rgba(0,0,0,0.1)',
+                borderColor: '#ff0000',
+                pointBackgroundColor: 'rgba(0,0,0,0)',
+                pointBorderColor: 'rgba(0,0,0,0)',
+
+                data: WarnLevel,
+              });
+
+              DailyDatasets.push({
+                type: 'line',
+                label: 'Normal Level',
+
+                fill: false,
+                backgroundColor: 'rgba(0,0,0,0.1)',
+                borderColor: '#ff7700',
+                pointBackgroundColor: 'rgba(0,0,0,0)',
+                pointBorderColor: 'rgba(0,0,0,0)',
+
+                data: NormalLevel,
+              });
+
+              DailyDatasets.push({
+                type: 'line',
+                label: 'Optimal Level',
+
+                fill: false,
+                backgroundColor: 'rgba(0,0,0,0.1)',
+                borderColor: '#7ed321',
+                pointBackgroundColor: 'rgba(0,0,0,0)',
+                pointBorderColor: 'rgba(0,0,0,0)',
+
+                data: OptimalLevel,
+              });
+
               DailyResultData = {
                 type: 'bar',
-                // labels: ["6:00~", "7:00~", "8:00~", "9:00~", "10:00~", "11:00~", "12:00~", "13:00~", "14:00~", "15:00~", "16:00~", "17:00~", "18:00~", "19:00~"],
-                labels: [
-                  '0:00~',
-                  '1:00~',
-                  '2:00~',
-                  '3:00~',
-                  '4:00~',
-                  '5:00~',
-                  '6:00~',
-                  '7:00~',
-                  '8:00~',
-                  '9:00~',
-                  '10:00~',
-                  '11:00~',
-                  '12:00~',
-                  '13:00~',
-                  '14:00~',
-                  '15:00~',
-                  '16:00~',
-                  '17:00~',
-                  '18:00~',
-                  '19:00~',
-                  '20:00~',
-                  '21:00~',
-                  '22:00~',
-                  '23:00~',
-                ],
+                labels: TimeLabels.slice(START_TIME, END_TIME),
                 datasets: DailyDatasets,
               };
 
               RealtimeData = {
                 type: 'bar',
-                // labels: ["6:00~", "7:00~", "8:00~", "9:00~", "10:00~", "11:00~", "12:00~", "13:00~", "14:00~", "15:00~", "16:00~", "17:00~", "18:00~", "19:00~"],
-                labels: [
-                  '0:00~',
-                  '1:00~',
-                  '2:00~',
-                  '3:00~',
-                  '4:00~',
-                  '5:00~',
-                  '6:00~',
-                  '7:00~',
-                  '8:00~',
-                  '9:00~',
-                  '10:00~',
-                  '11:00~',
-                  '12:00~',
-                  '13:00~',
-                  '14:00~',
-                  '15:00~',
-                  '16:00~',
-                  '17:00~',
-                  '18:00~',
-                  '19:00~',
-                  '20:00~',
-                  '21:00~',
-                  '22:00~',
-                  '23:00~',
-                ],
+                labels: TimeLabels.slice(0, END_TIME),
                 datasets: RealtimeDatasets,
               };
 

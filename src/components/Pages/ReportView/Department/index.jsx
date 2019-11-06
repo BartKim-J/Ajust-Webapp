@@ -50,9 +50,9 @@ class ReportDepartment extends Component {
   componentDidMount() {
     this.getDailyData();
 
-    setInterval(async () => {
+    this.TimerId = setInterval(async () => {
       this.getDailyData();
-    }, 2000);
+    }, 6000);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -68,6 +68,10 @@ class ReportDepartment extends Component {
       return true;
     }
     return false;
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.TimerId);
   }
 
   onClickCategoryButtons = value => {
@@ -215,7 +219,7 @@ Styled.ButtonBox = styled.div`
 Styled.BottomContentWrap = styled.div`
   position: relative;
   bottom: 0;
-  
+
   width: 100%;
   height: 70%;
 

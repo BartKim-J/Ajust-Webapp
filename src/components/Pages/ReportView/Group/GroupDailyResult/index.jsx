@@ -6,9 +6,7 @@ import { updateWeekRange, updateMonthRange, resetDateRange } from 'actions';
 
 import { Bar } from 'react-chartjs-2';
 
-
 import RangePieChart from '../../Components/RangePieChart';
-
 
 import './GroupDailyResult.scss';
 
@@ -32,7 +30,7 @@ const BarChartOptions = {
         stacked: true,
         display: true,
         gridLines: {
-          color: '#ffffff',
+          color: 'rgba(0, 0, 0, 0)',
           borderDash: [5, 8],
         },
         scaleLabel: {
@@ -51,7 +49,7 @@ const BarChartOptions = {
         stacked: true,
         display: true,
         gridLines: {
-          color: '#ffffff',
+          color: 'rgba(0, 0, 0, 0)',
           borderDash: [5, 8],
         },
         scaleLabel: {
@@ -79,6 +77,8 @@ class GroupDailyResult extends Component {
 
     this.onUpdateWeekRange = onUpdateWeekRange.bind(this);
     this.onUpdateMonthRange = onUpdateMonthRange.bind(this);
+
+    this.TimerId = 0;
   }
 
   componentDidMount() {
@@ -87,13 +87,17 @@ class GroupDailyResult extends Component {
 
     // console.log(this.chartReference); // returns a Chart.js instance reference
     // const timerId = setInterval(async () => {
-    setInterval(async () => {
+    this.TimerId = setInterval(async () => {
       if (this.chartReference) {
         const BarChartInstance = this.chartReference.chartInstance;
 
         BarChartInstance.update();
       }
-    }, 3000);
+    }, 6000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.TimerId);
   }
 
   render() {

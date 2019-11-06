@@ -25,7 +25,7 @@ const BarChartOptions = {
         stacked: true,
         display: true,
         gridLines: {
-          color: "rgba(0, 0, 0, 0)",
+          color: 'rgba(0, 0, 0, 0)',
           borderDash: [4, 8],
         },
         scaleLabel: {
@@ -44,7 +44,7 @@ const BarChartOptions = {
         stacked: true,
         display: true,
         gridLines: {
-          color: "rgba(0, 0, 0, 0)",
+          color: 'rgba(0, 0, 0, 0)',
           borderDash: [4, 8],
         },
         scaleLabel: {
@@ -67,13 +67,13 @@ class GroupList extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.TimerId = 0;
   }
 
   componentDidMount() {
-    // const timerId = setInterval(async () => {
-    setInterval(async () => {
-      // console.log(chartReference); // returns a Chart.js instance reference
-      chartReference.map((entryRef) => {
+    this.TimerId = setInterval(async () => {
+      chartReference.map(entryRef => {
         let BarChartInstance;
         if (entryRef) {
           BarChartInstance = entryRef.chartInstance;
@@ -83,46 +83,53 @@ class GroupList extends Component {
 
         return null;
       });
-    }, 3000);
+    }, 10000);
   }
 
   shouldComponentUpdate() {
     return false;
   }
 
+  componentWillUnmount() {
+    clearInterval(this.TimerId);
+  }
+
   render() {
-    const { GroupDatas } = this.props;
+    let { GroupDatas } = this.props;
+    const TimeLabels = [
+      '0:00~',
+      '1:00~',
+      '2:00~',
+      '3:00~',
+      '4:00~',
+      '5:00~',
+      '6:00~',
+      '7:00~',
+      '8:00~',
+      '9:00~',
+      '10:00~',
+      '11:00~',
+      '12:00~',
+      '13:00~',
+      '14:00~',
+      '15:00~',
+      '16:00~',
+      '17:00~',
+      '18:00~',
+      '19:00~',
+      '20:00~',
+      '21:00~',
+      '22:00~',
+      '23:00~',
+    ];
+
+    // Cut Level Charts
+    GroupDatas = GroupDatas.slice(0, GroupDatas.length - 3);
 
     const GroupChartBoxs = GroupDatas.map((data, idx) => {
       const groupData = {
         type: 'bar',
-        // labels: ["6:00", "7:00", "8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"],
-        labels: [
-          '0:00~',
-          '1:00~',
-          '2:00~',
-          '3:00~',
-          '4:00~',
-          '5:00~',
-          '6:00~',
-          '7:00~',
-          '8:00~',
-          '9:00~',
-          '10:00~',
-          '11:00~',
-          '12:00~',
-          '13:00~',
-          '14:00~',
-          '15:00~',
-          '16:00~',
-          '17:00~',
-          '18:00~',
-          '19:00~',
-          '20:00~',
-          '21:00~',
-          '22:00~',
-          '23:00~',
-        ],
+        labels: TimeLabels.slice(6, TimeLabels.length),
         datasets: [data],
       };
 
@@ -156,8 +163,6 @@ GroupList.propTypes = {
   GroupDatas: PropTypes.array.isRequired,
 };
 
-GroupList.defaultProps = {
-
-}
+GroupList.defaultProps = {};
 
 export default GroupList;

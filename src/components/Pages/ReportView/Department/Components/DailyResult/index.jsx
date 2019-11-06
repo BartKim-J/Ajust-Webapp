@@ -107,6 +107,8 @@ class DailyResult extends Component {
 
     this.onUpdateWeekRange = onUpdateWeekRange.bind(this);
     this.onUpdateMonthRange = onUpdateMonthRange.bind(this);
+
+    this.TimerId = 0;
   }
 
   componentDidMount() {
