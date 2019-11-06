@@ -75,7 +75,6 @@ class ReportDepartment extends Component {
   }
 
   onClickCategoryButtons = value => {
-    console.log(value);
     this.setState({ selected: value });
   };
 
