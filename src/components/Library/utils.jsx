@@ -151,6 +151,7 @@ function getDailyData() {
 
               const promisesAxiosAjusty = ajustyMap.map(async (ajusty, ajustyIndex) => {
                 const dataByGroup = [];
+                const RealTimeByGroup = [];
                 let logByGroup = [];
 
                 await axios
@@ -169,6 +170,7 @@ function getDailyData() {
 
                 const promisesAxiosAjustyLog = logByGroup.map(async (logs, hourIndex) => {
                   let KoreanHourIndex = hourIndex;
+                  const RealTimeByGroupTemp = [];
 
                   KoreanHourIndex += 9;
                   if (KoreanHourIndex >= 24) {
@@ -180,7 +182,6 @@ function getDailyData() {
                   if (dataByTime[KoreanHourIndex] === undefined) dataByTime[KoreanHourIndex] = 0;
                   dataByTime[KoreanHourIndex] += dataByGroup[KoreanHourIndex];
 
-                  // const cutMinute = 2.5;
                   const cutMinute = 2.5;
 
                   dataByTotal += dataByGroup[KoreanHourIndex];
@@ -188,7 +189,6 @@ function getDailyData() {
                     dataByRealTime += dataByGroup[KoreanHourIndex];
 
                     if (logByGroup[hourIndex] !== undefined) {
-                      // logByGroup[hourIndex].forEach(log => {
                       logByGroup[hourIndex].map(log => {
                         for (let min = 0; min < 60 / cutMinute; min += 1) {
                           if (dataByRealTimeData[min] === undefined) {
@@ -201,11 +201,24 @@ function getDailyData() {
                           ) {
                             dataByRealTimeData.splice(min, 1, dataByRealTimeData[min] + 1);
                           }
+
+                          if (RealTimeByGroupTemp[min] === undefined) {
+                            RealTimeByGroupTemp.splice(min, 0, 0);
+                          }
+                          if (
+                            parseInt(log.pushed_at.substring(14, 16), 10) >= min * cutMinute &&
+                            parseInt(log.pushed_at.substring(14, 16), 10) <
+                              min * cutMinute + cutMinute
+                          ) {
+                            RealTimeByGroupTemp.splice(min, 1, RealTimeByGroupTemp[min] + 1);
+                          }
                         }
 
                         return log;
                       });
                     }
+
+                    RealTimeByGroup[ajustyIndex] = RealTimeByGroupTemp;
                   }
                 });
 
@@ -254,7 +267,7 @@ function getDailyData() {
                   borderWidth: 1,
                   borderColor: this.backgroundColor,
 
-                  data: dataByRealTimeData.slice(0, END_TIME),
+                  data: RealTimeByGroup[ajustyIndex],
                 };
               });
 

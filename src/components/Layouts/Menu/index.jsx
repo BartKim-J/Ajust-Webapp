@@ -68,6 +68,10 @@ Styled.Container = styled.div`
     img {
       width: 100%;
     }
+
+    @media all and (max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT}) {
+      width: 48px;
+    }
   }
 
   .nav_menu-items {
@@ -89,6 +93,9 @@ Styled.Container = styled.div`
 
     @media all and (min-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT}) {
       font-size: 18px;
+    }
+    @media all and (max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT}) {
+      font-size: 14px;
     }
 
     color: #353b46 !important;

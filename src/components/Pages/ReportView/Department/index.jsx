@@ -75,6 +75,7 @@ class ReportDepartment extends Component {
   }
 
   onClickCategoryButtons = value => {
+    console.log(value);
     this.setState({ selected: value });
   };
 
@@ -214,6 +215,15 @@ Styled.TopContent = styled.div`
 Styled.ButtonBox = styled.div`
   position: absolute;
   bottom: 0;
+
+  width: 100%;
+  height: 15%;
+  max-height: 42px;
+
+  @media (max-aspect-ratio: 1/1) {
+    height: 7%;
+    max-height: 18px;
+  }
 `;
 
 Styled.BottomContentWrap = styled.div`

@@ -16,18 +16,18 @@ export default function CategoryButtons({ clickHandler, selected, currentPath, b
       ButtonClasses += ' category-button-selected';
     }
     return (
-      <Link key={stats.link} to={`${currentPath}/${stats.link}`}>
-        <button
-          type="button"
-          id={`category-button-${idx}`}
-          key={stats.link}
-          onClick={() => clickHandler(idx)}
-          className={ButtonClasses}
-        >
+      <button
+        type="button"
+        id={`category-button-${idx}`}
+        key={stats.link}
+        onClick={() => clickHandler(idx)}
+        className={ButtonClasses}
+      >
+        <Link key={stats.link} to={`${currentPath}/${stats.link}`}>
           <img src={ImgCategoryButton} alt={`button-${idx}`} />
-          <div className="category-name">{stats.label}</div>
-        </button>
-      </Link>
+        </Link>
+        <div className="category-name">{stats.label}</div>
+      </button>
     );
   });
 
@@ -55,22 +55,26 @@ const Styled = {};
 Styled.Wrap = styled.div`
   position: relative;
   width: 100%;
-
+  height: 100%;
 `;
 
 Styled.Container = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
 
   .category-button {
     position: relative;
 
     z-index: 1000;
 
-    width: 16vw;
+    width: 22%;
     max-width: 238px;
+    height: 100%;
 
     img {
       width: 100%;
+      height: 100%;
     }
 
     background: none;

@@ -93,6 +93,8 @@ class Realtime extends Component {
   render() {
     const { DailyResultStatus } = this.props;
 
+    console.log(DailyResultStatus);
+
     return (
       <div className="realtime-result-container">
         <div className="realtime-result-inner">
