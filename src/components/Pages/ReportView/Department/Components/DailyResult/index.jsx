@@ -60,7 +60,7 @@ const BarChartOptions = {
         stacked: true,
         display: true,
         gridLines: {
-          color: '#ffffff',
+          color: "rgba(0, 0, 0, 0)",
           borderDash: [5, 8],
         },
         scaleLabel: {
@@ -79,7 +79,7 @@ const BarChartOptions = {
         stacked: true,
         display: true,
         gridLines: {
-          color: '#ffffff',
+          color: "rgba(0, 0, 0, 0)",
           borderDash: [5, 8],
         },
         scaleLabel: {

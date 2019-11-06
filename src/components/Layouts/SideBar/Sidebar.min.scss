@@ -20,11 +20,11 @@ $sidebar-subnav-animation-delay: 0.3s ease 0s;
 
 @media all and (min-width: $media-width-desktop-min) and (max-width: $media-width-desktop) {
   .sidenav--wrap---open {
-    transform: translate3d($sidebar-open-width-px, $navmenu-height, 0px);
+    transform: translate3d($sidebar-open-width-px, 0, 0px);
     transition: all 0.15s ease 0s;
   }
   .sidenav--wrap---close {
-    transform: translate3d($sidebar-close-width-px, $navmenu-height, 0px);
+    transform: translate3d($sidebar-close-width-px, 0, 0px);
     transition: all 0.15s ease 0s;
   }
 

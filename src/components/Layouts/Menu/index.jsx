@@ -63,7 +63,7 @@ Styled.Container = styled.div`
 
   .nav_menu-logo {
     width: 4vw;
-    max-height: 58px;
+    max-width: 68px;
 
     img {
       width: 100%;

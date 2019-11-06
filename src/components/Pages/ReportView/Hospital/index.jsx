@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
+
+import mediaConf from 'configure/mediaConfig';
 
 import 'shards-ui/dist/css/shards.min.css';
 
@@ -13,7 +16,6 @@ import CategoryButtons from 'components/Library/CategoryButtons';
 import { getDailyData } from 'components/Library/utils';
 import StatusBox from '../Components/StatusBox';
 
-import './Hospital.scss';
 
 const buttonStats = [
   {
@@ -65,33 +67,38 @@ class ReportHospital extends Component {
     const { UserInfo } = this.state;
 
     return (
-      <div className="hospital-section">
-        <div className="hospital-inner">
-          {/* Status Boxs */}
-          <div className="hospital-top-container">
-            <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
+      <Styled.Section>
+        <Styled.Container>
+          <Styled.TopContentWrap>
+            <Styled.TopContent>
+              <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
 
-            <div className="button-box">
-              <CategoryButtons
-                buttonStats={buttonStats}
-                currentPath="/Report/Hospital"
-                selected={selected}
-                clickHandler={this.onClickCategoryButtons}
-              />
-            </div>
-          </div>
+              {/* Category Buttons */}
+              <Styled.ButtonBox>
+                <CategoryButtons
+                  buttonStats={buttonStats}
+                  currentPath="/Report/Hospital"
+                  selected={selected}
+                  clickHandler={this.onClickCategoryButtons}
+                />
+              </Styled.ButtonBox>
+            </Styled.TopContent>
+          </Styled.TopContentWrap>
 
-          <div className="hospital-bottom-container">
-            <Switch>
-              <Route
-                exact
-                path="/Report/Hospital"
-                render={() => <Redirect to="/Report/Hospital/?" />}
-              />
-            </Switch>
-          </div>
-        </div>
-      </div>
+          <Styled.BottomContentWrap>
+            <Styled.BottomContent>
+              {/* Router */}
+              <Switch>
+                <Route
+                  exact
+                  path="/Report/Hospital"
+                  render={() => <Redirect to="/Report/Hospital/?" />}
+                />
+              </Switch>
+            </Styled.BottomContent>
+          </Styled.BottomContentWrap>
+        </Styled.Container>
+      </Styled.Section>
     );
   }
 }
@@ -131,3 +138,64 @@ ReportHospital = connect(
 )(ReportHospital);
 
 export default ReportHospital;
+
+const Styled = {};
+
+Styled.Section = styled.div`
+  width: 100%;
+  height: 100%;
+
+  background: #555d6b;
+
+  transition-duration: 1s;
+`;
+Styled.Container = styled.div`
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+`;
+
+Styled.TopContentWrap = styled.div`
+  position: relative;
+
+  width: 100%;
+  max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT};
+  margin: 0 auto;
+
+  height: 30%;
+
+  background: #555d6b;
+`;
+
+Styled.TopContent = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT};
+  margin: 0 auto;
+`;
+
+Styled.BottomContentWrap = styled.div`
+  position: relative;
+
+  width: 100%;
+  height: 70%;
+
+  background: #353b46;
+`;
+
+Styled.BottomContent = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT};
+  margin: 0 auto;
+
+  @media all and (max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT}) {
+    padding: 0 ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT_PADDING};
+  }
+`;
+
+Styled.ButtonBox = styled.div`
+  position: absolute;
+  bottom: 0;
+`;

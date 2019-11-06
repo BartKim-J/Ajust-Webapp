@@ -1,12 +1,14 @@
-@import "configure/componentsConfig.scss";
-@import "configure/mediaConfig.scss";
+@import 'configure/componentsConfig.scss';
+@import 'configure/mediaConfig.scss';
 
 .pie-chart {
   position: relative;
   margin-bottom: 3vh;
 
+  width: 80%;
   height: 48%;
-  
+  margin: 0 auto;
+
   .title {
     font-size: 15px;
     color: white;
@@ -14,6 +16,7 @@
     text-align: center;
 
     .daypicker {
+      width: 100%;
       margin: 0 auto;
       padding: 1vh 0;
     }
@@ -21,6 +24,8 @@
 
   .pie-chart {
     position: relative;
-    height: 73%;
+    top: 5%;
+
+    height: 60%;
   }
 }

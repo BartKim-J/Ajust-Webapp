@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
+
+import mediaConf from 'configure/mediaConfig';
+
 import { FormSelect } from 'shards-react';
 
 import 'shards-ui/dist/css/shards.min.css';
@@ -16,9 +20,6 @@ import StatusBox from '../Components/StatusBox';
 
 import GroupDailyResult from './GroupDailyResult';
 import { GroupMap } from './GroupMap';
-
-// Style Sheets
-import './Group.scss';
 
 const WeeklyResultData = {
   type: 'doughnut',
@@ -140,60 +141,62 @@ class ReportGroup extends Component {
     const { UserInfo, selectedGroup } = this.state;
 
     return (
-      <div className="group-section">
-        <div className="group-inner">
-          {/* Top Container */}
-          <div className="group-top-container">
-            <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
+      <Styled.Section>
+        <Styled.Container>
+          <Styled.TopContentWrap>
+            <Styled.TopContent>
+              <StatusBox DailyResultStatus={DailyResultStatus} UserInfo={UserInfo} />
 
-            {/* Category Button Box */}
-            <div className="button-box">
-              <CategoryButtons
-                buttonStats={buttonStats}
-                currentPath="/Report/Group"
-                selected={selected}
-                clickHandler={this.onClickCategoryButtons}
-              />
-            </div>
-          </div>
+              {/* Category Buttons */}
+              <Styled.ButtonBox>
+                <CategoryButtons
+                  buttonStats={buttonStats}
+                  currentPath="/Report/Group"
+                  selected={selected}
+                  clickHandler={this.onClickCategoryButtons}
+                />
+              </Styled.ButtonBox>
+            </Styled.TopContent>
+          </Styled.TopContentWrap>
 
-          {/* Bottom Container */}
-          <div className="group-bottom-container">
-            {/* Group Select Form */}
-            <div className="group-select-box">{this.selectGroupForm()}</div>
+          <Styled.BottomContentWrap>
+            <Styled.BottomContent>
+              {/* Group Select Form */}
+              <Styled.GroupSelectBox>{this.selectGroupForm()}</Styled.GroupSelectBox>
 
-            <Switch>
-              {/* Router */}
-              <Route
-                exact
-                path="/Report/Group"
-                render={() => <Redirect to="/Report/Group/DailyResult" />}
-              />
+              <Switch>
+                {/* Router */}
+                <Route
+                  exact
+                  path="/Report/Group"
+                  render={() => <Redirect to="/Report/Group/DailyResult" />}
+                />
 
-              <Route
-                path="/Report/Group/DailyResult"
-                render={() => (
-                  <GroupDailyResult
-                    DailyResultData={this.getGroupData(selectedGroup)}
-                    WeeklyResultData={WeeklyResultData}
-                    MonthlyResultData={MonthlyResultData}
-                  />
-                )}
-              />
+                <Route
+                  path="/Report/Group/DailyResult"
+                  render={() => (
+                    <GroupDailyResult
+                      DailyResultData={this.getGroupData(selectedGroup)}
+                      WeeklyResultData={WeeklyResultData}
+                      MonthlyResultData={MonthlyResultData}
+                    />
+                  )}
+                />
 
-              <Route
-                path="/Report/Group/Map"
-                render={() => (
-                  <GroupMap
-                    GroupResultData={MonthlyResultData}
-                    DeviceResultData={WeeklyResultData}
-                  />
-                )}
-              />
-            </Switch>
-          </div>
-        </div>
-      </div>
+                <Route
+                  path="/Report/Group/Map"
+                  render={() => (
+                    <GroupMap
+                      GroupResultData={MonthlyResultData}
+                      DeviceResultData={WeeklyResultData}
+                    />
+                  )}
+                />
+              </Switch>
+            </Styled.BottomContent>
+          </Styled.BottomContentWrap>
+        </Styled.Container>
+      </Styled.Section>
     );
   }
 }
@@ -234,3 +237,88 @@ ReportGroup = connect(
 )(ReportGroup);
 
 export default ReportGroup;
+
+const Styled = {};
+
+Styled.Section = styled.div`
+  width: 100%;
+  height: 100%;
+
+  background: #555d6b;
+
+  transition-duration: 1s;
+`;
+Styled.Container = styled.div`
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+`;
+
+Styled.TopContentWrap = styled.div`
+  position: relative;
+
+  width: 100%;
+  max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT};
+  margin: 0 auto;
+
+  height: 30%;
+
+  background: #555d6b;
+`;
+
+Styled.TopContent = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT};
+  margin: 0 auto;
+`;
+
+Styled.BottomContentWrap = styled.div`
+  position: relative;
+
+  width: 100%;
+  height: 70%;
+
+  background: #353b46;
+`;
+
+Styled.BottomContent = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT};
+  margin: 0 auto;
+
+  @media all and (max-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT}) {
+    padding: 0 ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT_PADDING};
+  }
+`;
+
+Styled.ButtonBox = styled.div`
+  position: absolute;
+  bottom: 0;
+`;
+
+Styled.GroupSelectBox = styled.div`
+  position: absolute;
+  top: 3vh;
+  left: 5%;
+
+  z-index: 1006;
+
+  height: 5vh;
+  width: auto;
+
+  .group-select-form {
+    widows: 100% !important;
+    height: 100% !important;
+
+    background-color: #353b46 !important;
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+
+    color: white;
+    font-size: 2.5vh;
+  }
+`;

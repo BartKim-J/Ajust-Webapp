@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
+
+import mediaConf from 'configure/mediaConfig';
 
 import { Link } from 'react-router-dom';
 
@@ -53,26 +54,24 @@ const Styled = {};
 
 Styled.Wrap = styled.div`
   position: relative;
+  width: 100%;
+
 `;
 
 Styled.Container = styled.div`
   position: relative;
-  top: 3.6px;
-
-  max-height: 3.6em;
-  button {
-    outline: none;
-    cursor: pointer;
-  }
-
-  img {
-    height: 3.6em;
-    max-height: 60px;
-  }
 
   .category-button {
-    z-index: 1000;
     position: relative;
+
+    z-index: 1000;
+
+    width: 16vw;
+    max-width: 238px;
+
+    img {
+      width: 100%;
+    }
 
     background: none;
     border: none;
@@ -81,17 +80,21 @@ Styled.Container = styled.div`
 
     transition-duration: 0.5s;
 
-    padding: 0px 10px;
+    padding: 0px 1%;
 
     .category-name {
       position: absolute;
-      top: 25%;
+      top: 50%;
       left: 50%;
-      transform: translate(-50%, 0);
+      transform: translate(-50%, -35%);
 
-      font-size: 1.4em;
+      font-size: 0.8vw;
+      font-family: 'S-CoreDream-5';
+      color: #ffffff;
 
-      color: white;
+      @media all and (min-width: ${mediaConf.MEDIA_WIDTH_DESKTOP_CONTENT}) {
+        font-size: 14px;
+      }
     }
 
     &:hover {
