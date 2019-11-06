@@ -81,12 +81,12 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 # **Reference**
 
 ## **Library**
-* # React 
-  - ### [**ESLint**](https://eslint.org/)
-  - ### [**React Hook**](https://ko.reactjs.org/docs/hooks-reference.html)
-  - ### [**Prettier**](https://prettier.io/)
++ # React 
+    - ### [**ESLint**](https://eslint.org/)
+    - ### [**React Hook**](https://ko.reactjs.org/docs/hooks-reference.html)
+    - ### [**Prettier**](https://prettier.io/)
 
-* # NPM
++ # NPM
   - ### [**Shards React**](https://www.npmjs.com/package/shards-react)
   - ### [**Chart.js**](https://www.npmjs.com/package/chart.js)
   - ### [**Styled Components**](https://www.styled-components.com/)
