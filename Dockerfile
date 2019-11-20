@@ -11,6 +11,13 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 
-EXPOSE 3000
-CMD [ "npm", "start" ]
+RUN npm run build --production
+
+# In your Dockerfile.
+RUN npm install -g serve
+
+# Run serve when the image is run.
+CMD serve -s build
+
+EXPOSE 5000
 
